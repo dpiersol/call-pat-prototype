@@ -4,6 +4,10 @@ Monorepo for the **Call Pat** internal reporting prototype: **Expo** employee ap
 
 **GitHub:** [github.com/dpiersol/call-pat-prototype](https://github.com/dpiersol/call-pat-prototype) (private)
 
+## CI
+
+- **GitHub Actions** runs `npm ci`, `npm run db:push`, and `npm run build` on every push and pull request to `main` (see `.github/workflows/ci.yml`).
+
 ## Prerequisites
 
 - **Node.js 20+** and npm (or pnpm)

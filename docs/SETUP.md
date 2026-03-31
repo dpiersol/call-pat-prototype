@@ -36,6 +36,14 @@ This document records how the dev environment was brought up and issues that wer
 - `npm run build -w @call-pat/web-admin` — production build succeeded.
 - API `GET /health` returned `{"ok":true}` with the dev server running.
 
+## API TypeScript (`tsc`)
+
+- `packages/api` uses Hono route groups with `c.get("user")`. The `authed` and `staff` `Hono` instances are typed with `{ Variables: { user: AuthUser } }` so `tsc` passes under strict mode.
+
+## CI
+
+- GitHub Actions workflow `.github/workflows/ci.yml` runs `npm ci`, `npm run db:push`, and `npm run build` on pushes and PRs to `main`.
+
 ## Known follow-ups
 
 - `npm audit` reports vulnerabilities in transitive dependencies; address in a dedicated pass if required for deployment.

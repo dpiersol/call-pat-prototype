@@ -15,7 +15,14 @@ import {
   type ReportStatus,
   type WorkOrderStatus,
 } from "@call-pat/shared";
-import { authMiddleware, getBearerToken, requireRole, signToken, verifyToken } from "./auth.js";
+import {
+  authMiddleware,
+  getBearerToken,
+  requireRole,
+  signToken,
+  verifyToken,
+  type AuthUser,
+} from "./auth.js";
 import { db, schema } from "./db/index.js";
 import { toReport, toWorkOrder } from "./lib/mappers.js";
 import { canTransitionReport, canTransitionWorkOrder } from "./workflows/status.js";
@@ -27,6 +34,8 @@ const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 const ALLOWED_MIME = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+
+type AuthedVariables = { user: AuthUser };
 
 const app = new Hono();
 
@@ -71,7 +80,7 @@ app.post("/auth/demo-login", async (c) => {
   });
 });
 
-const authed = new Hono();
+const authed = new Hono<{ Variables: AuthedVariables }>();
 authed.use("/*", authMiddleware);
 
 authed.get("/me", (c) => {
@@ -248,7 +257,7 @@ authed.patch("/reports/:id", async (c) => {
   return c.json(report);
 });
 
-const staff = new Hono();
+const staff = new Hono<{ Variables: AuthedVariables }>();
 staff.use("/*", authMiddleware);
 staff.use("/*", requireRole("dispatcher", "admin"));
 
