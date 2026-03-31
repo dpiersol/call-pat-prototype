@@ -9,7 +9,7 @@
     "ios": "expo start --ios"
   },
   "dependencies": {
-    "@call-pat/shared": "workspace:*",
+    "@call-pat/shared": "*",
     "@react-navigation/native": "^7.0.14",
     "@react-native-async-storage/async-storage": "1.23.1",
     "expo": "~52.0.23",
