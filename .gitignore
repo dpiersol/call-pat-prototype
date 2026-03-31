@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.expo
+*.db
+*.db-journal
+uploads
+.env
+.env.local
+.DS_Store
+*.log
+.git-rewrite
