@@ -1,3 +1,4 @@
+import { REPORT_CATEGORY_OPTIONS } from "@call-pat/shared";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { listReportsAdmin } from "../api";
@@ -7,12 +8,14 @@ import { useState } from "react";
 export default function Queue() {
   const { token } = useSession();
   const [status, setStatus] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
 
   const q = useQuery({
-    queryKey: ["admin-reports", token, status],
+    queryKey: ["admin-reports", token, status, category],
     queryFn: () =>
       listReportsAdmin(token!, {
         status: status || undefined,
+        category: category || undefined,
       }),
     enabled: !!token,
   });
@@ -24,7 +27,7 @@ export default function Queue() {
       <div className="row" style={{ marginBottom: "1rem" }}>
         <h1 style={{ margin: 0 }}>Report queue</h1>
         <label className="muted">
-          Status filter{" "}
+          Status{" "}
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
@@ -37,7 +40,21 @@ export default function Queue() {
             <option value="closed">closed</option>
           </select>
         </label>
-      </div>
+        <label className="muted">
+          Category{" "}
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">All</option>
+            {REPORT_CATEGORY_OPTIONS.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </label>
+    </div>
       {q.isLoading && <p className="muted">Loading…</p>}
       {q.error && (
         <p style={{ color: "#b91c1c" }}>{String(q.error)}</p>

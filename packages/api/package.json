@@ -10,7 +10,8 @@
     "predb:push": "node -e \"require('node:fs').mkdirSync('data',{recursive:true})\"",
     "db:push": "npx drizzle-kit push",
     "db:seed": "npx tsx src/db/seed.ts",
-    "db:studio": "npx drizzle-kit studio"
+    "db:studio": "npx drizzle-kit studio",
+    "test": "npx tsx src/smoke.ts"
   },
   "dependencies": {
     "@call-pat/shared": "*",

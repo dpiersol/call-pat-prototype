@@ -30,10 +30,11 @@ export async function demoLogin(
 
 export async function listReportsAdmin(
   token: string,
-  params?: { status?: string; from?: string; to?: string },
+  params?: { status?: string; category?: string; from?: string; to?: string },
 ): Promise<{ reports: Report[] }> {
   const q = new URLSearchParams();
   if (params?.status) q.set("status", params.status);
+  if (params?.category) q.set("category", params.category);
   if (params?.from) q.set("from", params.from);
   if (params?.to) q.set("to", params.to);
   const res = await fetch(`${API}/admin/reports?${q}`, {
@@ -41,6 +42,30 @@ export async function listReportsAdmin(
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
+}
+
+export async function listMyReports(
+  token: string,
+): Promise<{ reports: Report[] }> {
+  const res = await fetch(`${API}/reports/mine`, {
+    headers: authHeaders(token),
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+/** Multipart POST — do not set Content-Type (browser sets boundary). */
+export async function submitReport(
+  token: string,
+  form: FormData,
+): Promise<Report> {
+  const res = await fetch(`${API}/reports`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+    body: form,
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json() as Promise<Report>;
 }
 
 export async function getReport(token: string, id: string): Promise<Report> {

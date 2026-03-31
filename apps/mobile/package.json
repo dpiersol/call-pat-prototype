@@ -9,9 +9,10 @@
     "ios": "expo start --ios"
   },
   "dependencies": {
-    "@call-pat/shared": "*",
-    "@react-navigation/native": "^7.0.14",
+    "@call-pat/shared": "file:../../packages/shared",
     "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-navigation/native": "^7.0.14",
+    "call-pat-prototype": "file:../..",
     "expo": "~52.0.23",
     "expo-constants": "~17.0.3",
     "expo-image": "~2.0.3",

@@ -27,7 +27,7 @@ From the repo root (`call-pat-prototype`):
 npm install
 ```
 
-This repo uses **npm workspaces** with internal packages referenced as `"@call-pat/shared": "*"` (compatible with `npm install`). If you use **pnpm**, you can change those entries to `"workspace:*"` if you prefer.
+This repo uses **npm workspaces** for `packages/*` and `apps/web-admin`. The **Expo mobile app** (`apps/mobile`) is **not** hoisted into the root workspace (npm’s dependency tree breaks on `react-native` when it is a workspace package). Install the mobile app separately after the root install (see **Run the mobile app** below). Shared code is linked via `"@call-pat/shared": "file:../../packages/shared"` in `apps/mobile/package.json`.
 
 Create the database and seed demo users (from repo root). The API package runs a `predb:push` step that creates `packages/api/data` before Drizzle applies the schema:
 
@@ -61,6 +61,14 @@ VITE_API_URL=http://localhost:8787
 ```
 
 ## Run the mobile app
+
+Install mobile dependencies once (after `npm install` at the repo root):
+
+```bash
+npm run install:mobile
+```
+
+Then start Expo:
 
 ```bash
 npm run dev:mobile
@@ -100,12 +108,13 @@ Passwordless: each app calls `POST /auth/demo-login` with `{ "email": "..." }` a
 
 ## First preview (local)
 
-1. `npm install`
-2. `npm run db:push` then `npm run db:seed`
-3. `npm run dev` — open [http://localhost:5173](http://localhost:5173) (admin) and confirm [http://localhost:8787/health](http://localhost:8787/health) returns `{"ok":true}`
-4. Log in as `dispatcher@demo.local` and open the report queue.
+1. `npm install` (root workspaces only)
+2. `npm run install:mobile` (Expo app; one-time or when mobile deps change)
+3. `npm run db:push` then `npm run db:seed`
+4. `npm run dev` — open [http://localhost:5173](http://localhost:5173) (admin) and confirm [http://localhost:8787/health](http://localhost:8787/health) returns `{"ok":true}`
+5. Log in as `dispatcher@demo.local` and open the report queue.
 
-**Lockfile:** `package-lock.json` is committed so installs are reproducible.
+**Lockfiles:** Root `package-lock.json` covers workspaces; `apps/mobile/package-lock.json` covers the Expo app (run `npm run install:mobile` to sync).
 
 ## Troubleshooting
 
@@ -113,7 +122,8 @@ Passwordless: each app calls `POST /auth/demo-login` with `{ "email": "..." }` a
 |-------|-------------|
 | `drizzle-kit` / `tsx` not found on Windows | Run commands via `npm run` from the repo root (uses local `node_modules/.bin`). Scripts use `npx` where needed. |
 | `Cannot open database … directory does not exist` on `db:push` | Run `npm run db:push` again — `predb:push` creates `packages/api/data`. |
-| `npm` and `workspace:*` | Use `npm install` with `"*"` in `package.json` deps (as in this repo), not `workspace:*`. |
+| `npm` and `workspace:*` | Use `npm install` with `"*"` in workspace `package.json` deps (as in this repo), not `workspace:*`. |
+| `Invalid Version` / npm crash on `react-native` | Mobile is installed separately (`npm run install:mobile`); do not add `apps/mobile` back to root `workspaces`. |
 | `better-sqlite3` build errors | Install Visual Studio Build Tools (C++ workload) or use a Node version with prebuilt binaries for your OS. |
 
 ## pnpm
@@ -127,4 +137,4 @@ pnpm db:seed
 pnpm dev
 ```
 
-Adjust commands using `pnpm --filter @call-pat/<pkg>` as needed. You may need to set `"@call-pat/shared": "workspace:*"` in workspace packages when using pnpm.
+Adjust commands using `pnpm --filter @call-pat/<pkg>` as needed. Workspace packages can use `"@call-pat/shared": "workspace:*"` where applicable. For the mobile app, run `cd apps/mobile && pnpm install` (or keep using `npm run install:mobile`).

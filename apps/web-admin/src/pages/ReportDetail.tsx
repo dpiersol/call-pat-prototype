@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
-  attachmentUrl,
   createWorkOrder,
   getReport,
   linkReportToWorkOrder,
   listWorkOrders,
 } from "../api";
+import { useBlobImage } from "../hooks/useBlobImage";
 import { useSession } from "../session";
 
 export default function ReportDetail() {
@@ -169,32 +169,4 @@ export default function ReportDetail() {
       )}
     </div>
   );
-}
-
-function useBlobImage(token: string | null, attachmentId: string | undefined) {
-  const [url, setUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!token || !attachmentId) {
-      setUrl(null);
-      return;
-    }
-    let cancelled = false;
-    let objectUrl: string | null = null;
-    (async () => {
-      const res = await fetch(attachmentUrl(attachmentId), {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) return;
-      const blob = await res.blob();
-      objectUrl = URL.createObjectURL(blob);
-      if (!cancelled) setUrl(objectUrl);
-    })();
-    return () => {
-      cancelled = true;
-      if (objectUrl) URL.revokeObjectURL(objectUrl);
-    };
-  }, [token, attachmentId]);
-
-  return url;
 }

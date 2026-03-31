@@ -6,6 +6,15 @@ export type Role = z.infer<typeof roleSchema>;
 export const locationSourceSchema = z.enum(["gps", "manual", "exif"]);
 export type LocationSource = z.infer<typeof locationSourceSchema>;
 
+/** Default labels for new reports (keep in sync across clients). */
+export const REPORT_CATEGORY_OPTIONS = [
+  "Needles",
+  "Graffiti",
+  "Pothole",
+  "Other",
+] as const;
+export type ReportCategoryOption = (typeof REPORT_CATEGORY_OPTIONS)[number];
+
 export const reportStatusSchema = z.enum([
   "submitted",
   "triaged",
@@ -146,6 +155,8 @@ export type PatchWorkOrderBody = z.infer<typeof patchWorkOrderBodySchema>;
 
 export const listReportsQuerySchema = z.object({
   status: reportStatusSchema.optional(),
+  /** Exact match on stored category label */
+  category: z.string().max(200).optional(),
   from: z.string().datetime().optional(),
   to: z.string().datetime().optional(),
 });

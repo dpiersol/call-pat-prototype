@@ -2,16 +2,18 @@ import { useNavigate } from "react-router-dom";
 import { useState, type FormEvent } from "react";
 import { demoLogin } from "../api";
 import { useSession } from "../session";
+import type { DemoLoginRequest } from "@call-pat/shared";
 
-const EMAILS = [
+const EMAILS: DemoLoginRequest["email"][] = [
+  "reporter@demo.local",
   "dispatcher@demo.local",
   "admin@demo.local",
-] as const;
+];
 
 export default function Login() {
   const nav = useNavigate();
   const { setSession } = useSession();
-  const [email, setEmail] = useState<(typeof EMAILS)[number]>(EMAILS[0]);
+  const [email, setEmail] = useState<DemoLoginRequest["email"]>(EMAILS[0]);
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +24,11 @@ export default function Login() {
     try {
       const res = await demoLogin(email);
       setSession(res.token, res.user.role);
-      nav("/queue");
+      if (res.user.role === "employee") {
+        nav("/reporter", { replace: true });
+      } else {
+        nav("/queue", { replace: true });
+      }
     } catch (e: unknown) {
       setErr(e instanceof Error ? e.message : "Login failed");
     } finally {
@@ -32,20 +38,31 @@ export default function Login() {
 
   return (
     <div className="card" style={{ maxWidth: 420 }}>
-      <h1 style={{ marginTop: 0 }}>Dispatcher login (demo)</h1>
+      <h1 style={{ marginTop: 0 }}>Sign in (demo)</h1>
+      <p className="muted">
+        Passwordless demo accounts — no real SSO in this prototype.
+      </p>
       <form onSubmit={onSubmit}>
         <label className="muted" htmlFor="email">
-          Demo account
+          Account
         </label>
         <select
           id="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value as (typeof EMAILS)[number])}
+          onChange={(e) =>
+            setEmail(e.target.value as DemoLoginRequest["email"])
+          }
           style={{ width: "100%", marginTop: 6, marginBottom: 12 }}
         >
           {EMAILS.map((x) => (
             <option key={x} value={x}>
-              {x}
+              {x} (
+              {x.startsWith("reporter")
+                ? "employee"
+                : x.startsWith("dispatcher")
+                  ? "dispatcher"
+                  : "admin"}
+              )
             </option>
           ))}
         </select>

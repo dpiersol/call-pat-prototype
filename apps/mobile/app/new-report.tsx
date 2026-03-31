@@ -1,4 +1,5 @@
 import type { LocationSource } from "@call-pat/shared";
+import { REPORT_CATEGORY_OPTIONS } from "@call-pat/shared";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 import { router } from "expo-router";
@@ -17,8 +18,6 @@ import MapView, { Marker } from "react-native-maps";
 import { submitReport } from "../lib/api";
 import { useAuth } from "../lib/auth";
 
-const CATEGORIES = ["Needles", "Graffiti", "Pothole", "Other"];
-
 export default function NewReportScreen() {
   const { token } = useAuth();
   const [step, setStep] = useState(0);
@@ -30,7 +29,7 @@ export default function NewReportScreen() {
   const [address, setAddress] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [category, setCategory] = useState<string>(REPORT_CATEGORY_OPTIONS[0]);
   const [region, setRegion] = useState({
     latitude: 35.0844,
     longitude: -106.6504,
@@ -178,7 +177,7 @@ export default function NewReportScreen() {
           <Text style={styles.h}>3 · Details</Text>
           <Text style={styles.label}>Category</Text>
           <View style={styles.chips}>
-            {CATEGORIES.map((c) => (
+            {REPORT_CATEGORY_OPTIONS.map((c) => (
               <Pressable
                 key={c}
                 style={[styles.chip, category === c && styles.chipOn]}

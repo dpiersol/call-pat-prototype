@@ -23,5 +23,11 @@ jobs:
       - name: Database schema
         run: npm run db:push
 
+      - name: Seed demo users
+        run: npm run db:seed
+
+      - name: Unit tests
+        run: npm run test
+
       - name: Build all workspaces
         run: npm run build
