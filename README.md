@@ -76,6 +76,8 @@ npm run dev:mobile
 
 Then open the project in **Expo Go** (same LAN) or an emulator. For iOS TestFlight or App Store builds, see `apps/mobile/docs/BUILD_IOS.md`.
 
+**EAS cloud builds (progress and logs):** after `eas build`, follow the printed link or open [expo.dev](https://expo.dev) → your project → **Builds**. Details: [apps/mobile/docs/MONITORING_EAS.md](apps/mobile/docs/MONITORING_EAS.md).
+
 For a **physical device**, the API must be reachable on your LAN. Copy `apps/mobile/.env.example` to `apps/mobile/.env` and set your machine’s IP:
 
 ```bash

@@ -1,5 +1,7 @@
 # Building and releasing iOS (TestFlight / App Store)
 
+**Where to watch builds:** see [MONITORING_EAS.md](./MONITORING_EAS.md) (Expo dashboard, terminal link, `eas build:list`).
+
 This document covers **EAS Build** and **EAS Submit** for `apps/mobile` (Expo SDK 52, React Native 0.76).
 
 ## Prerequisites
@@ -8,7 +10,7 @@ This document covers **EAS Build** and **EAS Submit** for `apps/mobile` (Expo SD
 
 2. **App Store Connect**: an app record with the same **bundle identifier** as in `config/expo.ios.js` (`gov.cabq.callpat.prototype` unless you change it everywhere consistently).
 
-3. **Expo account**: sign up at [expo.dev](https://expo.dev) and install EAS CLI globally if you prefer (`npm install -g eas-cli`), or use `npx eas-cli`.
+3. **Expo account**: sign up at [expo.dev](https://expo.dev). From `apps/mobile` after `npm run install:mobile`, use the bundled CLI: `npm run eas -- <command>` (for example `npm run eas -- login`). Alternatively: `npm install -g eas-cli` or `npx eas-cli`.
 
 4. **Node.js 20+** (aligned with `eas.json` production `node` version).
 
@@ -28,9 +30,14 @@ cd apps/mobile
 
 ## Log in to EAS
 
+Run **interactively** in your own terminal (browser or password prompt):
+
 ```bash
-eas login
+cd apps/mobile
+npm run eas -- login
 ```
+
+(`eas login` if using a global install.)
 
 Ensure `apps/mobile/eas.json` exists and the `production` profile is the one you use for store builds (it already sets Node 20.18.3 and iOS `resourceClass`).
 
@@ -39,7 +46,7 @@ Ensure `apps/mobile/eas.json` exists and the `production` profile is the one you
 If the app is not yet linked to an Expo project, run from `apps/mobile`:
 
 ```bash
-eas init
+npm run eas -- init
 ```
 
 Commit any updates EAS writes (for example `extra.eas.projectId` in config) so CI and teammates share the same project.
@@ -53,7 +60,7 @@ Commit any updates EAS writes (for example `extra.eas.projectId` in config) so C
 Example (EAS secret for production profile):
 
 ```bash
-eas secret:create --scope project --name EXPO_PUBLIC_API_URL --value https://api.example.com --type string
+npm run eas -- secret:create --scope project --name EXPO_PUBLIC_API_URL --value https://api.example.com --type string
 ```
 
 Adjust naming to match how your app reads env at build time (`app.config.js` can expose `extra` if you prefer non-public vars).
@@ -73,7 +80,7 @@ Store these in EAS or your CI secrets manager—never commit keys.
 From `apps/mobile`:
 
 ```bash
-eas build --platform ios --profile production
+npm run eas -- build --platform ios --profile production
 ```
 
 - **Versioning**: root `eas.json` uses `"appVersionSource": "remote"`, so **version** / **build number** can be managed in App Store Connect / EAS rather than only in `app.config.js`. Still bump `config/expo.ios.js` `buildNumber` when you want the native project to reflect a new build, or rely on EAS auto-increment if you add that to the profile.
@@ -85,7 +92,7 @@ eas build --platform ios --profile production
 ### Option A: EAS Submit
 
 ```bash
-eas submit -p ios --profile production
+npm run eas -- submit -p ios --profile production
 ```
 
 Follow prompts to pick the latest build or a specific artifact. With App Store Connect API credentials configured, this can run in CI.

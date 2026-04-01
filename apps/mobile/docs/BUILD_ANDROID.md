@@ -1,12 +1,13 @@
 # Android builds (Google Play)
 
+**Where to watch builds:** see [MONITORING_EAS.md](./MONITORING_EAS.md) (Expo dashboard, terminal link, `eas build:list`).
+
 Internal steps for producing an **Android App Bundle (AAB)** with **EAS Build** and uploading to **Google Play** (e.g. internal testing). The production profile is configured in `eas.json` with `android.buildType: "app-bundle"`, which is what Play requires.
 
 ## 1. EAS account
 
 1. Create an [Expo](https://expo.dev) account if you do not have one.
-2. Install EAS CLI globally (once per machine): `npm install -g eas-cli`
-3. Log in: `eas login`
+2. From `apps/mobile` (after `npm run install:mobile` from repo root), the repo includes **eas-cli**: use `npm run eas -- login` (or `npm install -g eas-cli` then `eas login`).
 
 Link the project on first use from `apps/mobile` (EAS will prompt): `eas build:configure` if you have not already generated `eas.json` (this repo already includes it).
 
@@ -24,7 +25,7 @@ This installs `apps/mobile` in isolation (required because the Expo app is not p
 
 ```bash
 cd apps/mobile
-eas build --platform android --profile production
+npm run eas -- build --platform android --profile production
 ```
 
 - The **production** profile uses Node 20 and produces an **AAB** suitable for Play Console.
