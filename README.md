@@ -4,6 +4,8 @@ Monorepo for the **Call Pat** internal reporting prototype: **Expo** employee ap
 
 **GitHub:** [github.com/dpiersol/call-pat-prototype](https://github.com/dpiersol/call-pat-prototype) (private)
 
+**Deployment / identity (city, cloud vs on‑prem, @cabq.gov):** [docs/DEPLOYMENT_AND_IDENTITY.md](docs/DEPLOYMENT_AND_IDENTITY.md)
+
 ## CI
 
 - **GitHub Actions** runs `npm ci`, `npm run db:push`, and `npm run build` on every push and pull request to `main` (see `.github/workflows/ci.yml`).

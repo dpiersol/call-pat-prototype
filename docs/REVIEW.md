@@ -41,6 +41,8 @@ Design choice: **one web bundle** for both roles (separate routes, role-gated) a
 4. **API**  
    `GET http://localhost:8787/health` → `{"ok":true}`.
 
+For **city deployment options, cloud vs on‑prem, and @cabq.gov (Entra ID)**, see [DEPLOYMENT_AND_IDENTITY.md](./DEPLOYMENT_AND_IDENTITY.md).
+
 ## Out of scope (explicit)
 
 - Real SSO / Azure AD  
