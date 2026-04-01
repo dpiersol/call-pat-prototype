@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { listReportsAdmin } from "../api";
 import { useSession } from "../session";
 import { useState } from "react";
+import { badgeClass } from "../ui";
 
 export default function Queue() {
   const { token } = useSession();
@@ -22,16 +23,18 @@ export default function Queue() {
 
   if (!token) return null;
 
+  const count = q.data?.reports.length ?? 0;
+
   return (
     <div>
       <div className="row" style={{ marginBottom: "1rem" }}>
-        <h1 style={{ margin: 0 }}>Report queue</h1>
+        <h1 style={{ margin: 0 }}>
+          📋 Report Queue
+          {count > 0 && <span className="count-pill">{count}</span>}
+        </h1>
         <label className="muted">
           Status{" "}
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
             <option value="">All</option>
             <option value="submitted">submitted</option>
             <option value="triaged">triaged</option>
@@ -42,23 +45,16 @@ export default function Queue() {
         </label>
         <label className="muted">
           Category{" "}
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
+          <select value={category} onChange={(e) => setCategory(e.target.value)}>
             <option value="">All</option>
             {REPORT_CATEGORY_OPTIONS.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
+              <option key={c} value={c}>{c}</option>
             ))}
           </select>
         </label>
-    </div>
+      </div>
       {q.isLoading && <p className="muted">Loading…</p>}
-      {q.error && (
-        <p style={{ color: "#b91c1c" }}>{String(q.error)}</p>
-      )}
+      {q.error && <p style={{ color: "var(--cabq-danger)" }}>{String(q.error)}</p>}
       {q.data && (
         <div className="card" style={{ padding: 0, overflow: "auto" }}>
           <table>
@@ -74,23 +70,20 @@ export default function Queue() {
             <tbody>
               {q.data.reports.map((r) => (
                 <tr key={r.id}>
-                  <td>{new Date(r.createdAt).toLocaleString()}</td>
+                  <td className="muted">{new Date(r.createdAt).toLocaleDateString()}</td>
                   <td>{r.category}</td>
-                  <td>{r.title}</td>
-                  <td>
-                    <span className="badge">{r.status}</span>
-                  </td>
-                  <td>
-                    <Link to={`/reports/${r.id}`}>Open</Link>
-                  </td>
+                  <td><strong>{r.title}</strong></td>
+                  <td><span className={badgeClass(r.status)}>{r.status}</span></td>
+                  <td><Link to={`/reports/${r.id}`}>Open →</Link></td>
                 </tr>
               ))}
             </tbody>
           </table>
           {q.data.reports.length === 0 && (
-            <p className="muted" style={{ padding: "1rem" }}>
-              No reports yet.
-            </p>
+            <div className="empty-state">
+              <div className="empty-icon">🎈</div>
+              <p>No reports match your filters. The Duke City is looking good!</p>
+            </div>
           )}
         </div>
       )}

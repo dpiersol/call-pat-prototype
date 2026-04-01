@@ -4,16 +4,16 @@ import { demoLogin } from "../api";
 import { useSession } from "../session";
 import type { DemoLoginRequest } from "@call-pat/shared";
 
-const EMAILS: DemoLoginRequest["email"][] = [
-  "reporter@demo.local",
-  "dispatcher@demo.local",
-  "admin@demo.local",
+const ACCOUNTS: { email: DemoLoginRequest["email"]; label: string }[] = [
+  { email: "reporter@demo.local", label: "Field Reporter (employee)" },
+  { email: "dispatcher@demo.local", label: "Dispatcher" },
+  { email: "admin@demo.local", label: "Admin" },
 ];
 
 export default function Login() {
   const nav = useNavigate();
   const { setSession } = useSession();
-  const [email, setEmail] = useState<DemoLoginRequest["email"]>(EMAILS[0]);
+  const [email, setEmail] = useState<DemoLoginRequest["email"]>(ACCOUNTS[0].email);
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -37,40 +37,36 @@ export default function Login() {
   }
 
   return (
-    <div className="card" style={{ maxWidth: 420 }}>
-      <h1 style={{ marginTop: 0 }}>Sign in (demo)</h1>
-      <p className="muted">
-        Passwordless demo accounts — no real SSO in this prototype.
+    <div className="card login-card">
+      <div className="city-badge">🏜️</div>
+      <h1>Call Pat</h1>
+      <p className="muted" style={{ marginBottom: "1.2rem" }}>
+        City of Albuquerque — Employee Reporting
+        <br />
+        <small>Demo mode &middot; production will use @cabq.gov SSO</small>
       </p>
       <form onSubmit={onSubmit}>
-        <label className="muted" htmlFor="email">
-          Account
+        <label className="muted" htmlFor="email" style={{ display: "block", textAlign: "left", marginBottom: 4 }}>
+          Demo account
         </label>
         <select
           id="email"
           value={email}
-          onChange={(e) =>
-            setEmail(e.target.value as DemoLoginRequest["email"])
-          }
-          style={{ width: "100%", marginTop: 6, marginBottom: 12 }}
+          onChange={(e) => setEmail(e.target.value as DemoLoginRequest["email"])}
+          style={{ width: "100%", marginBottom: 14, padding: "0.5rem" }}
         >
-          {EMAILS.map((x) => (
-            <option key={x} value={x}>
-              {x} (
-              {x.startsWith("reporter")
-                ? "employee"
-                : x.startsWith("dispatcher")
-                  ? "dispatcher"
-                  : "admin"}
-              )
-            </option>
+          {ACCOUNTS.map((a) => (
+            <option key={a.email} value={a.email}>{a.label} — {a.email}</option>
           ))}
         </select>
-        {err && <p style={{ color: "#b91c1c" }}>{err}</p>}
-        <button className="primary" type="submit" disabled={loading}>
+        {err && <p style={{ color: "var(--cabq-danger)" }}>{err}</p>}
+        <button className="primary" type="submit" disabled={loading} style={{ width: "100%", padding: "0.7rem" }}>
           {loading ? "Signing in…" : "Sign in"}
         </button>
       </form>
+      <p className="muted" style={{ marginTop: "1.5rem", fontSize: "0.78rem" }}>
+        🎈 Built with green chile and good intentions
+      </p>
     </div>
   );
 }

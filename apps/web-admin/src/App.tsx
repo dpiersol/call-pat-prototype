@@ -22,113 +22,58 @@ export default function App() {
   const isStaff = role === "dispatcher" || role === "admin";
 
   return (
-    <div className="layout">
-      <header className="row" style={{ marginBottom: "1rem", flexWrap: "wrap" }}>
-        <strong>Call Pat</strong>
+    <>
+      <header className="app-header">
+        <Link to="/" className="brand">
+          <span className="logo-icon">🌶️</span>
+          <span>
+            Call Pat
+            <span className="tagline"> — City of Albuquerque</span>
+          </span>
+        </Link>
         {token && (
           <>
-            {isEmployee && (
-              <span className="row" style={{ gap: 12 }}>
-                <Link to="/reporter">Home</Link>
-                <Link to="/reporter/new">New report</Link>
-                <Link to="/reporter/my-reports">My reports</Link>
-              </span>
-            )}
-            {isStaff && (
-              <span className="row" style={{ gap: 12 }}>
-                <Link to="/queue">Queue</Link>
-              </span>
-            )}
-            <span className="muted">
-              {role} ·{" "}
+            <nav>
+              {isEmployee && (
+                <>
+                  <Link to="/reporter">Home</Link>
+                  <Link to="/reporter/new">New Report</Link>
+                  <Link to="/reporter/my-reports">My Reports</Link>
+                </>
+              )}
+              {isStaff && <Link to="/queue">Queue</Link>}
+            </nav>
+            <span className="user-info">
+              {role}
               <button
                 type="button"
-                style={{
-                  border: "none",
-                  background: "none",
-                  color: "#1d4ed8",
-                  cursor: "pointer",
-                  padding: 0,
-                }}
+                className="signout-btn"
                 onClick={() => {
                   clear();
                   window.location.href = "/login";
                 }}
               >
-                sign out
+                Sign out
               </button>
             </span>
           </>
         )}
       </header>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<RootRedirect />} />
+      <div className="layout">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<RootRedirect />} />
 
-        <Route
-          path="/reporter"
-          element={
-            token && isEmployee ? <ReporterHome /> : <Navigate to="/login" replace />
-          }
-        />
-        <Route
-          path="/reporter/new"
-          element={
-            token && isEmployee ? (
-              <ReporterNewReport />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route
-          path="/reporter/my-reports"
-          element={
-            token && isEmployee ? (
-              <ReporterMyReports />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route
-          path="/reporter/reports/:id"
-          element={
-            token && isEmployee ? (
-              <ReporterReportDetail />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
+          <Route path="/reporter" element={token && isEmployee ? <ReporterHome /> : <Navigate to="/login" replace />} />
+          <Route path="/reporter/new" element={token && isEmployee ? <ReporterNewReport /> : <Navigate to="/login" replace />} />
+          <Route path="/reporter/my-reports" element={token && isEmployee ? <ReporterMyReports /> : <Navigate to="/login" replace />} />
+          <Route path="/reporter/reports/:id" element={token && isEmployee ? <ReporterReportDetail /> : <Navigate to="/login" replace />} />
 
-        <Route
-          path="/queue"
-          element={
-            token && isStaff ? <Queue /> : <Navigate to="/login" replace />
-          }
-        />
-        <Route
-          path="/reports/:id"
-          element={
-            token && isStaff ? (
-              <ReportDetail />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route
-          path="/work-orders/:id"
-          element={
-            token && isStaff ? (
-              <WorkOrderDetail />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-      </Routes>
-    </div>
+          <Route path="/queue" element={token && isStaff ? <Queue /> : <Navigate to="/login" replace />} />
+          <Route path="/reports/:id" element={token && isStaff ? <ReportDetail /> : <Navigate to="/login" replace />} />
+          <Route path="/work-orders/:id" element={token && isStaff ? <WorkOrderDetail /> : <Navigate to="/login" replace />} />
+        </Routes>
+      </div>
+    </>
   );
 }

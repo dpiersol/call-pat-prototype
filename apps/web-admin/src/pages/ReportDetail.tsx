@@ -9,6 +9,7 @@ import {
 } from "../api";
 import { useBlobImage } from "../hooks/useBlobImage";
 import { useSession } from "../session";
+import { badgeClass } from "../ui";
 
 export default function ReportDetail() {
   const { id } = useParams();
@@ -59,39 +60,31 @@ export default function ReportDetail() {
 
   return (
     <div>
-      <p>
-        <Link to="/queue">← Queue</Link>
-      </p>
+      <p><Link to="/queue">← Queue</Link></p>
       {reportQ.isLoading && <p className="muted">Loading…</p>}
-      {reportQ.error && (
-        <p style={{ color: "#b91c1c" }}>{String(reportQ.error)}</p>
-      )}
+      {reportQ.error && <p style={{ color: "var(--cabq-danger)" }}>{String(reportQ.error)}</p>}
       {reportQ.data && (
         <>
           <div className="card">
             <h1 style={{ marginTop: 0 }}>{reportQ.data.title}</h1>
-            <p className="muted">
-              {reportQ.data.category} ·{" "}
-              <span className="badge">{reportQ.data.status}</span>
+            <p>
+              {reportQ.data.category} &middot;{" "}
+              <span className={badgeClass(reportQ.data.status)}>{reportQ.data.status}</span>
             </p>
             <p style={{ whiteSpace: "pre-wrap" }}>{reportQ.data.description}</p>
             <p className="muted">
-              Location:{" "}
+              📍{" "}
               {reportQ.data.addressText ??
                 `${reportQ.data.lat ?? "—"}, ${reportQ.data.lng ?? "—"}`}{" "}
               ({reportQ.data.locationSource})
             </p>
             {imageSrc && (
-              <img
-                src={imageSrc}
-                alt="Report attachment"
-                style={{ maxWidth: "100%", borderRadius: 8 }}
-              />
+              <img src={imageSrc} alt="Report attachment" style={{ maxWidth: "100%", borderRadius: 8, marginTop: 8 }} />
             )}
           </div>
 
           <div className="card">
-            <h2 style={{ marginTop: 0 }}>Work order</h2>
+            <h2 style={{ marginTop: 0 }}>🔧 Work Order</h2>
             {reportQ.data.workOrderId ? (
               <p>
                 Linked:{" "}
@@ -102,64 +95,34 @@ export default function ReportDetail() {
             ) : (
               <>
                 <div className="row" style={{ marginBottom: 8 }}>
-                  <input
-                    value={woTitle}
-                    onChange={(e) => setWoTitle(e.target.value)}
-                    placeholder="Title"
-                  />
-                  <input
-                    value={woOrg}
-                    onChange={(e) => setWoOrg(e.target.value)}
-                    placeholder="Owning org"
-                  />
-                  <button
-                    className="primary"
-                    type="button"
-                    disabled={createWo.isPending}
-                    onClick={() => createWo.mutate()}
-                  >
+                  <input value={woTitle} onChange={(e) => setWoTitle(e.target.value)} placeholder="Title" />
+                  <input value={woOrg} onChange={(e) => setWoOrg(e.target.value)} placeholder="Owning org" />
+                  <button className="primary" type="button" disabled={createWo.isPending} onClick={() => createWo.mutate()}>
                     Create work order
                   </button>
                 </div>
                 <div className="row">
-                  <select
-                    value={linkId}
-                    onChange={(e) => setLinkId(e.target.value)}
-                  >
+                  <select value={linkId} onChange={(e) => setLinkId(e.target.value)}>
                     <option value="">Link existing…</option>
                     {wosQ.data?.workOrders.map((w) => (
-                      <option key={w.id} value={w.id}>
-                        {w.title} ({w.status})
-                      </option>
+                      <option key={w.id} value={w.id}>{w.title} ({w.status})</option>
                     ))}
                   </select>
-                  <button
-                    type="button"
-                    disabled={!linkId || linkWo.isPending}
-                    onClick={() => linkWo.mutate()}
-                  >
-                    Link
-                  </button>
+                  <button type="button" disabled={!linkId || linkWo.isPending} onClick={() => linkWo.mutate()}>Link</button>
                 </div>
               </>
             )}
-            {createWo.error && (
-              <p style={{ color: "#b91c1c" }}>{String(createWo.error)}</p>
-            )}
+            {createWo.error && <p style={{ color: "var(--cabq-danger)" }}>{String(createWo.error)}</p>}
           </div>
 
           <div className="card">
-            <h2 style={{ marginTop: 0 }}>Status timeline</h2>
+            <h2 style={{ marginTop: 0 }}>📜 Status Timeline</h2>
             <ul className="timeline">
               {(reportQ.data.statusEvents ?? []).map((ev) => (
                 <li key={ev.id}>
                   <strong>{ev.toStatus}</strong>{" "}
-                  <span className="muted">
-                    {new Date(ev.createdAt).toLocaleString()}
-                  </span>
-                  {ev.fromStatus && (
-                    <div className="muted">from {ev.fromStatus}</div>
-                  )}
+                  <span className="muted">{new Date(ev.createdAt).toLocaleString()}</span>
+                  {ev.fromStatus && <div className="muted">from {ev.fromStatus}</div>}
                   {ev.note && <div className="muted">{ev.note}</div>}
                 </li>
               ))}

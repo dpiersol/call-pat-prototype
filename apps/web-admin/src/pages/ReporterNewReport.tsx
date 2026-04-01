@@ -46,65 +46,42 @@ export default function ReporterNewReport() {
 
   return (
     <div>
-      <h1 style={{ marginTop: 0 }}>New report</h1>
-      <form className="card" onSubmit={onSubmit}>
+      <h1 style={{ marginTop: 0 }}>📸 New Report</h1>
+      <form className="card" onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <label className="muted">Photo (required)</label>
         <input
           type="file"
           accept="image/jpeg,image/png,image/webp"
-          style={{ marginBottom: 12 }}
           onChange={(e) => setFile(e.target.files?.[0] ?? null)}
         />
+
         <label className="muted">Category</label>
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          style={{ width: "100%", marginBottom: 12 }}
-        >
+        <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ width: "100%" }}>
           {REPORT_CATEGORY_OPTIONS.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
+            <option key={c} value={c}>{c}</option>
           ))}
         </select>
+
         <label className="muted">Short title</label>
-        <input
-          required
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ width: "100%", marginBottom: 12, padding: 8 }}
-        />
-        <label className="muted">Description</label>
-        <textarea
-          required
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows={5}
-          style={{ width: "100%", marginBottom: 12, padding: 8 }}
-        />
-        <p className="muted" style={{ marginTop: 0 }}>
-          Location — adjust lat/lng if you are not at the scene (prototype uses manual
-          pin).
+        <input required value={title} onChange={(e) => setTitle(e.target.value)} style={{ width: "100%", padding: 8 }} />
+
+        <label className="muted">Description — what did you see?</label>
+        <textarea required value={description} onChange={(e) => setDescription(e.target.value)} rows={4} style={{ width: "100%", padding: 8 }} />
+
+        <p className="muted" style={{ margin: 0 }}>
+          📍 Location — adjust lat/lng or add a cross street
         </p>
-        <div className="row" style={{ marginBottom: 12 }}>
-          <label>
-            Lat{" "}
-            <input value={lat} onChange={(e) => setLat(e.target.value)} style={{ width: 120 }} />
-          </label>
-          <label>
-            Lng{" "}
-            <input value={lng} onChange={(e) => setLng(e.target.value)} style={{ width: 120 }} />
-          </label>
+        <div className="row">
+          <label>Lat <input value={lat} onChange={(e) => setLat(e.target.value)} style={{ width: 120 }} /></label>
+          <label>Lng <input value={lng} onChange={(e) => setLng(e.target.value)} style={{ width: 120 }} /></label>
         </div>
+
         <label className="muted">Cross street / address (optional)</label>
-        <input
-          value={addressText}
-          onChange={(e) => setAddressText(e.target.value)}
-          style={{ width: "100%", marginBottom: 12, padding: 8 }}
-        />
-        {err && <p style={{ color: "#b91c1c" }}>{err}</p>}
-        <button className="primary" type="submit" disabled={loading}>
-          {loading ? "Submitting…" : "Submit report"}
+        <input value={addressText} onChange={(e) => setAddressText(e.target.value)} style={{ width: "100%", padding: 8 }} />
+
+        {err && <p style={{ color: "var(--cabq-danger)" }}>{err}</p>}
+        <button className="primary" type="submit" disabled={loading} style={{ padding: "0.7rem" }}>
+          {loading ? "Submitting…" : "🚀 Submit Report"}
         </button>
       </form>
     </div>

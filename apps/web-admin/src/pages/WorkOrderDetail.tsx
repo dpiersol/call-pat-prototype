@@ -4,14 +4,10 @@ import { useState } from "react";
 import { getWorkOrder, patchWorkOrder } from "../api";
 import type { WorkOrderStatus } from "@call-pat/shared";
 import { useSession } from "../session";
+import { badgeClass } from "../ui";
 
 const STATUSES: WorkOrderStatus[] = [
-  "new",
-  "triaged",
-  "assigned",
-  "in_progress",
-  "resolved",
-  "closed",
+  "new", "triaged", "assigned", "in_progress", "resolved", "closed",
 ];
 
 export default function WorkOrderDetail() {
@@ -39,17 +35,15 @@ export default function WorkOrderDetail() {
 
   return (
     <div>
-      <p>
-        <Link to="/queue">← Queue</Link>
-      </p>
+      <p><Link to="/queue">← Queue</Link></p>
       {q.isLoading && <p className="muted">Loading…</p>}
-      {q.error && <p style={{ color: "#b91c1c" }}>{String(q.error)}</p>}
+      {q.error && <p style={{ color: "var(--cabq-danger)" }}>{String(q.error)}</p>}
       {q.data && (
         <div className="card">
-          <h1 style={{ marginTop: 0 }}>{q.data.title}</h1>
-          <p className="muted">
-            <span className="badge">{q.data.status}</span> · Priority{" "}
-            {q.data.priority} · {q.data.owningOrg}
+          <h1 style={{ marginTop: 0 }}>🔧 {q.data.title}</h1>
+          <p>
+            <span className={badgeClass(q.data.status)}>{q.data.status}</span>
+            {" "}&middot; Priority {q.data.priority} &middot; {q.data.owningOrg}
           </p>
           {q.data.assignee && <p>Assignee: {q.data.assignee}</p>}
           {q.data.createdFromReportId && (
@@ -62,7 +56,7 @@ export default function WorkOrderDetail() {
           )}
           <div className="row" style={{ marginTop: 12 }}>
             <label className="muted">
-              Next status{" "}
+              Advance status{" "}
               <select
                 onChange={(e) => {
                   const v = e.target.value as WorkOrderStatus;
@@ -70,34 +64,22 @@ export default function WorkOrderDetail() {
                 }}
                 defaultValue=""
               >
-                <option value="" disabled>
-                  Select transition…
-                </option>
+                <option value="" disabled>Select transition…</option>
                 {STATUSES.filter((s) => s !== q.data.status).map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
+                  <option key={s} value={s}>{s}</option>
                 ))}
               </select>
             </label>
-            <input
-              placeholder="Note (optional)"
-              value={note ?? ""}
-              onChange={(e) => setNote(e.target.value || null)}
-            />
+            <input placeholder="Note (optional)" value={note ?? ""} onChange={(e) => setNote(e.target.value || null)} />
           </div>
-          {mut.error && (
-            <p style={{ color: "#b91c1c" }}>{String(mut.error)}</p>
-          )}
+          {mut.error && <p style={{ color: "var(--cabq-danger)" }}>{String(mut.error)}</p>}
 
-          <h2>Timeline</h2>
+          <h2>📜 Timeline</h2>
           <ul className="timeline">
             {(q.data.statusEvents ?? []).map((ev) => (
               <li key={ev.id}>
                 <strong>{ev.toStatus}</strong>{" "}
-                <span className="muted">
-                  {new Date(ev.createdAt).toLocaleString()}
-                </span>
+                <span className="muted">{new Date(ev.createdAt).toLocaleString()}</span>
                 {ev.note && <div className="muted">{ev.note}</div>}
               </li>
             ))}
