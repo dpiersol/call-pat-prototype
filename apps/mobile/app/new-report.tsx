@@ -17,6 +17,7 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import { submitReport } from "../lib/api";
 import { useAuth } from "../lib/auth";
+import { theme } from "../lib/theme";
 
 export default function NewReportScreen() {
   const { token } = useAuth();
@@ -202,7 +203,7 @@ export default function NewReportScreen() {
             onPress={() => void submit()}
           >
             {busy ? (
-              <ActivityIndicator color="#fff" />
+              <ActivityIndicator color={theme.colors.onPrimary} />
             ) : (
               <Text style={styles.btnText}>Submit report</Text>
             )}
@@ -214,46 +215,47 @@ export default function NewReportScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16, paddingBottom: 40, gap: 16 },
+  container: { padding: theme.spacing.md, paddingBottom: theme.spacing.sectionBottom, gap: theme.spacing.md },
   section: { gap: 10 },
-  h: { fontSize: 18, fontWeight: "700" },
-  muted: { color: "#64748b" },
-  map: { width: "100%", height: 220, borderRadius: 8 },
-  label: { fontWeight: "600", marginTop: 4 },
+  h: { fontSize: theme.font.section, fontWeight: "700", color: theme.colors.text },
+  muted: { color: theme.colors.muted },
+  map: { width: "100%", height: 220, borderRadius: theme.radius.sm },
+  label: { fontWeight: "600", marginTop: theme.spacing.xs, color: theme.colors.text },
   input: {
     borderWidth: 1,
-    borderColor: "#cbd5e1",
-    borderRadius: 8,
+    borderColor: theme.colors.border,
+    borderRadius: theme.radius.sm,
     padding: 10,
-    fontSize: 16,
-    backgroundColor: "#fff",
+    fontSize: theme.font.body,
+    backgroundColor: theme.colors.surface,
+    color: theme.colors.text,
   },
   btn: {
-    backgroundColor: "#1d4ed8",
+    backgroundColor: theme.colors.primary,
     padding: 14,
-    borderRadius: 8,
+    borderRadius: theme.radius.sm,
     alignItems: "center",
   },
   btnDisabled: { opacity: 0.7 },
-  btnText: { color: "#fff", fontWeight: "600", fontSize: 16 },
+  btnText: { color: theme.colors.onPrimary, fontWeight: "600", fontSize: theme.font.body },
   btnSecondary: {
     borderWidth: 1,
-    borderColor: "#cbd5e1",
+    borderColor: theme.colors.border,
     padding: 14,
-    borderRadius: 8,
+    borderRadius: theme.radius.sm,
     alignItems: "center",
   },
-  btnSecondaryText: { fontWeight: "600", fontSize: 16, color: "#0f172a" },
-  chips: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  btnSecondaryText: { fontWeight: "600", fontSize: theme.font.body, color: theme.colors.text },
+  chips: { flexDirection: "row", flexWrap: "wrap", gap: theme.spacing.sm },
   chip: {
     paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 999,
+    paddingVertical: theme.spacing.sm,
+    borderRadius: theme.radius.pill,
     borderWidth: 1,
-    borderColor: "#cbd5e1",
-    backgroundColor: "#fff",
+    borderColor: theme.colors.border,
+    backgroundColor: theme.colors.surface,
   },
-  chipOn: { backgroundColor: "#1d4ed8", borderColor: "#1d4ed8" },
-  chipText: { color: "#0f172a" },
-  chipTextOn: { color: "#fff", fontWeight: "600" },
+  chipOn: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
+  chipText: { color: theme.colors.text },
+  chipTextOn: { color: theme.colors.onPrimary, fontWeight: "600" },
 });

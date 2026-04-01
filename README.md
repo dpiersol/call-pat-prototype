@@ -74,7 +74,7 @@ Then start Expo:
 npm run dev:mobile
 ```
 
-Then open the project in **Expo Go** (same LAN) or an emulator.
+Then open the project in **Expo Go** (same LAN) or an emulator. For iOS TestFlight or App Store builds, see `apps/mobile/docs/BUILD_IOS.md`.
 
 For a **physical device**, the API must be reachable on your LAN. Copy `apps/mobile/.env.example` to `apps/mobile/.env` and set your machine’s IP:
 
@@ -83,6 +83,8 @@ EXPO_PUBLIC_API_URL=http://192.168.x.x:8787
 ```
 
 Restart Expo after changing env.
+
+**Google Play (AAB) builds:** see [apps/mobile/docs/BUILD_ANDROID.md](apps/mobile/docs/BUILD_ANDROID.md).
 
 ## Demo accounts
 

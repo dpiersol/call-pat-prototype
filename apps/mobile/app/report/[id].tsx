@@ -12,6 +12,7 @@ import {
 import { attachmentImageSource, fetchReport } from "../../lib/api";
 import { useAuth } from "../../lib/auth";
 import { useFocusEffect } from "@react-navigation/native";
+import { theme } from "../../lib/theme";
 
 export default function ReportDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -42,7 +43,7 @@ export default function ReportDetailScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {!report && !err ? <ActivityIndicator /> : null}
+      {!report && !err ? <ActivityIndicator color={theme.colors.primary} /> : null}
       {err ? <Text style={styles.err}>{err}</Text> : null}
       {report && (
         <>
@@ -85,21 +86,21 @@ export default function ReportDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16, gap: 8, paddingBottom: 32 },
-  title: { fontSize: 22, fontWeight: "700" },
-  body: { fontSize: 16, lineHeight: 22, marginTop: 8 },
-  muted: { color: "#64748b", marginTop: 4 },
-  badge: { fontWeight: "700", color: "#1d4ed8" },
-  image: { width: "100%", height: 220, borderRadius: 8, marginTop: 12 },
-  h2: { marginTop: 16, fontSize: 18, fontWeight: "700" },
+  container: { padding: theme.spacing.md, gap: theme.spacing.sm, paddingBottom: 32 },
+  title: { fontSize: theme.font.title, fontWeight: "700", color: theme.colors.text },
+  body: { fontSize: theme.font.body, lineHeight: 22, marginTop: theme.spacing.sm, color: theme.colors.text },
+  muted: { color: theme.colors.muted, marginTop: theme.spacing.xs },
+  badge: { fontWeight: "700", color: theme.colors.primary },
+  image: { width: "100%", height: 220, borderRadius: theme.radius.sm, marginTop: 12 },
+  h2: { marginTop: theme.spacing.md, fontSize: theme.font.section, fontWeight: "700", color: theme.colors.text },
   ev: {
     borderLeftWidth: 3,
-    borderLeftColor: "#e2e8f0",
+    borderLeftColor: theme.colors.timelineBorder,
     paddingLeft: 12,
-    marginTop: 8,
+    marginTop: theme.spacing.sm,
   },
-  evTitle: { fontWeight: "600" },
-  err: { color: "#b91c1c" },
+  evTitle: { fontWeight: "600", color: theme.colors.text },
+  err: { color: theme.colors.error },
   linkBtn: { marginTop: 20 },
-  link: { color: "#1d4ed8", fontWeight: "600" },
+  link: { color: theme.colors.primary, fontWeight: "600" },
 });

@@ -12,6 +12,7 @@ import {
 import { fetchMyReports } from "../lib/api";
 import { useAuth } from "../lib/auth";
 import { useFocusEffect } from "@react-navigation/native";
+import { theme } from "../lib/theme";
 
 export default function MyReportsScreen() {
   const { token } = useAuth();
@@ -45,7 +46,7 @@ export default function MyReportsScreen() {
   return (
     <View style={styles.container}>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator color={theme.colors.primary} />
       ) : (
         <FlatList
           data={reports}
@@ -57,6 +58,8 @@ export default function MyReportsScreen() {
                 setRefreshing(true);
                 void load();
               }}
+              tintColor={theme.colors.primary}
+              colors={[theme.colors.primary]}
             />
           }
           ListEmptyComponent={
@@ -84,16 +87,16 @@ export default function MyReportsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, padding: theme.spacing.md },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.surface,
     borderWidth: 1,
-    borderColor: "#e2e8f0",
-    borderRadius: 8,
+    borderColor: theme.colors.borderLight,
+    borderRadius: theme.radius.sm,
     padding: 12,
     marginBottom: 10,
   },
-  cardTitle: { fontSize: 16, fontWeight: "600" },
-  muted: { color: "#64748b", marginTop: 4 },
-  err: { color: "#b91c1c", marginTop: 8 },
+  cardTitle: { fontSize: theme.font.body, fontWeight: "600", color: theme.colors.text },
+  muted: { color: theme.colors.muted, marginTop: theme.spacing.xs },
+  err: { color: theme.colors.error, marginTop: theme.spacing.sm },
 });

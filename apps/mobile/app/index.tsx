@@ -1,6 +1,7 @@
 import { Redirect, router } from "expo-router";
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
 import { useAuth } from "../lib/auth";
+import { theme } from "../lib/theme";
 
 export default function HomeScreen() {
   const { token, user, loading, logout } = useAuth();
@@ -8,7 +9,7 @@ export default function HomeScreen() {
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator />
+        <ActivityIndicator color={theme.colors.primary} />
       </View>
     );
   }
@@ -38,23 +39,23 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   center: { flex: 1, justifyContent: "center", alignItems: "center" },
-  container: { flex: 1, padding: 20, gap: 12 },
-  title: { fontSize: 26, fontWeight: "700" },
-  sub: { color: "#64748b", marginBottom: 8 },
+  container: { flex: 1, padding: theme.spacing.md, gap: theme.spacing.sm + 4 },
+  title: { fontSize: theme.font.titleLarge, fontWeight: "700", color: theme.colors.text },
+  sub: { color: theme.colors.muted, marginBottom: theme.spacing.sm },
   btn: {
-    backgroundColor: "#1d4ed8",
+    backgroundColor: theme.colors.primary,
     padding: 14,
-    borderRadius: 8,
+    borderRadius: theme.radius.sm,
     alignItems: "center",
   },
-  btnText: { color: "#fff", fontWeight: "600", fontSize: 16 },
+  btnText: { color: theme.colors.onPrimary, fontWeight: "600", fontSize: theme.font.body },
   btnSecondary: {
     borderWidth: 1,
-    borderColor: "#cbd5e1",
+    borderColor: theme.colors.border,
     padding: 14,
-    borderRadius: 8,
+    borderRadius: theme.radius.sm,
     alignItems: "center",
   },
-  btnSecondaryText: { fontWeight: "600", fontSize: 16, color: "#0f172a" },
-  link: { color: "#1d4ed8", marginTop: 16, textAlign: "center" },
+  btnSecondaryText: { fontWeight: "600", fontSize: theme.font.body, color: theme.colors.text },
+  link: { color: theme.colors.primary, marginTop: theme.spacing.md, textAlign: "center" },
 });

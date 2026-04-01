@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { useAuth } from "../lib/auth";
+import { theme } from "../lib/theme";
 
 export default function LoginScreen() {
   const { login } = useAuth();
@@ -40,7 +41,7 @@ export default function LoginScreen() {
         onPress={() => void signIn()}
       >
         {busy ? (
-          <ActivityIndicator color="#fff" />
+          <ActivityIndicator color={theme.colors.onPrimary} />
         ) : (
           <Text style={styles.btnText}>Sign in as demo reporter</Text>
         )}
@@ -50,16 +51,21 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, gap: 12, justifyContent: "center" },
-  title: { fontSize: 22, fontWeight: "700" },
-  muted: { color: "#64748b" },
-  err: { color: "#b91c1c" },
+  container: {
+    flex: 1,
+    padding: theme.spacing.md,
+    gap: theme.spacing.sm + 4,
+    justifyContent: "center",
+  },
+  title: { fontSize: theme.font.title, fontWeight: "700", color: theme.colors.text },
+  muted: { color: theme.colors.muted },
+  err: { color: theme.colors.error },
   btn: {
-    backgroundColor: "#1d4ed8",
+    backgroundColor: theme.colors.primary,
     padding: 14,
-    borderRadius: 8,
+    borderRadius: theme.radius.sm,
     alignItems: "center",
   },
   btnDisabled: { opacity: 0.7 },
-  btnText: { color: "#fff", fontWeight: "600", fontSize: 16 },
+  btnText: { color: theme.colors.onPrimary, fontWeight: "600", fontSize: theme.font.body },
 });
