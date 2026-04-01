@@ -15,7 +15,8 @@
     "test": "npm run test -w @call-pat/api"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "drizzle-orm": "^0.45.2"
   },
   "engines": {
     "node": ">=20"
