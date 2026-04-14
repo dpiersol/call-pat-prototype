@@ -54,12 +54,14 @@ Write-Host "`n[4/5] Applying database migrations..." -ForegroundColor Yellow
 npm run db:push
 
 Write-Host "`n[5/5] Reloading PM2 process..." -ForegroundColor Yellow
+# Temporarily allow non-zero exit codes so we can fall back to pm2 start
+$ErrorActionPreference = "Continue"
 pm2 reload ecosystem.config.cjs --update-env --env production
-
 if ($LASTEXITCODE -ne 0) {
-  Write-Host "PM2 reload failed – starting fresh..." -ForegroundColor Red
+  Write-Host "  PM2 reload failed - starting fresh..." -ForegroundColor Red
   pm2 start ecosystem.config.cjs --env production
 }
+$ErrorActionPreference = "Stop"
 
 pm2 save
 
