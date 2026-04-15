@@ -31,7 +31,13 @@ export default function Login() {
         nav("/queue", { replace: true });
       }
     } catch (e: unknown) {
-      setErr(e instanceof Error ? e.message : "Login failed");
+      if (e instanceof TypeError) {
+        setErr(
+          "Cannot reach the API. From the repo root run `npm run dev -w @call-pat/api` (port 8787), then try again. Or set VITE_API_URL in `.env`.",
+        );
+      } else {
+        setErr(e instanceof Error ? e.message : "Login failed");
+      }
     } finally {
       setLoading(false);
     }

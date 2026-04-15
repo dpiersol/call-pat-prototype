@@ -7,8 +7,17 @@ import type {
   WorkOrder,
 } from "@call-pat/shared";
 
-const API =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ?? "http://localhost:8787";
+/** In dev, default to same-origin so Vite can proxy to the API (see vite.config.ts). */
+function resolveApiBase(): string {
+  const raw = import.meta.env.VITE_API_URL as string | undefined;
+  if (raw != null && String(raw).trim() !== "") {
+    return raw.replace(/\/$/, "");
+  }
+  if (import.meta.env.DEV) return "";
+  return "http://127.0.0.1:8787";
+}
+
+const API = resolveApiBase();
 
 function authHeaders(token: string | null): HeadersInit {
   const h: Record<string, string> = { "Content-Type": "application/json" };
