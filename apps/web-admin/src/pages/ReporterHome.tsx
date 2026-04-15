@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import heroArt from "../assets/see-that-montoya.png";
 import { randomQuip } from "../ui";
 
 export default function ReporterHome() {
   return (
     <div>
       <div className="hero-card card">
+        <img src={heroArt} alt="" width={520} height={200} className="hero-art" decoding="async" />
         <h1>
           <span className="hero-see">SEE </span>
           <span className="hero-that">THAT?</span>

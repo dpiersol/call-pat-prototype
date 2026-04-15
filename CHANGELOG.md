@@ -8,6 +8,7 @@ All notable changes to this project are documented in this file.
 
 - `feature/figma-design-integration` branch aligning the web admin UI with Figma-exported concepts (`figma/`): ONE Albuquerque wordmark, blue gradient reporter shell, red gradient staff shell, and refreshed login / reporter / queue surfaces.
 - `apps/web-admin` Vitest coverage for layout theme helpers used by the app shell.
+- Figma “See That?” Montoya artwork on the login card and reporter home hero (`apps/web-admin/src/assets/see-that-montoya.png`, copied from the Figma export).
 
 ### Fixed
 

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, type FormEvent } from "react";
+import heroArt from "../assets/see-that-montoya.png";
 import { demoLogin } from "../api";
 import { useSession } from "../session";
 import type { DemoLoginRequest } from "@call-pat/shared";
@@ -38,6 +39,14 @@ export default function Login() {
 
   return (
     <div className="card login-card">
+      <img
+        src={heroArt}
+        alt="See That? Call Pat"
+        width={440}
+        height={170}
+        className="login-hero-art"
+        decoding="async"
+      />
       <div className="product-lockup" aria-hidden>
         <span className="see">SEE </span>
         <span className="that">THAT?</span>

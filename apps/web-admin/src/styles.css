@@ -329,6 +329,13 @@ tbody tr:hover { background: rgba(52,152,219,.06); }
   box-shadow: 0 18px 50px rgba(0,0,0,.12);
   border: none;
 }
+.login-hero-art {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 1rem;
+}
+
 .login-card .product-lockup {
   margin-bottom: 1rem;
 }
@@ -358,6 +365,15 @@ tbody tr:hover { background: rgba(52,152,219,.06); }
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(52,152,219,.25);
 }
+.hero-art {
+  display: block;
+  max-width: min(100%, 520px);
+  height: auto;
+  max-height: 200px;
+  margin: 0 auto 1rem;
+  object-fit: contain;
+}
+
 .hero-card h1 {
   margin: 0 0 0.5rem;
   font-size: 1.65rem;
