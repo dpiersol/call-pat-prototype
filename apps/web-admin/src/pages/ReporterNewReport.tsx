@@ -46,8 +46,15 @@ export default function ReporterNewReport() {
 
   return (
     <div>
-      <h1 style={{ marginTop: 0 }}>📸 New Report</h1>
-      <form className="card" onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      <div style={{ marginBottom: "1rem" }}>
+        <h1 className="form-page-title" style={{ marginTop: 0 }}>
+          REPORT AN <span className="emph">ISSUE</span>
+        </h1>
+        <p className="form-page-lede">
+          Add a photo, category, and location so dispatch can triage your report.
+        </p>
+      </div>
+      <form className="card" onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 10, borderRadius: 16, padding: "1.25rem 1.35rem" }}>
         <label className="muted">Photo (required)</label>
         <input
           type="file"

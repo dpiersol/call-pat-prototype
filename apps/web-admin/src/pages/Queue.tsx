@@ -27,11 +27,14 @@ export default function Queue() {
 
   return (
     <div>
-      <div className="row" style={{ marginBottom: "1rem" }}>
-        <h1 style={{ margin: 0 }}>
-          📋 Report Queue
+      <div className="staff-page-head">
+        <h1>
+          Admin dashboard
           {count > 0 && <span className="count-pill">{count}</span>}
         </h1>
+        <p className="staff-page-sub">Triage and assign reported issues</p>
+      </div>
+      <div className="row" style={{ marginBottom: "1rem" }}>
         <label className="muted">
           Status{" "}
           <select value={status} onChange={(e) => setStatus(e.target.value)}>

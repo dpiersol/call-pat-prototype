@@ -12,7 +12,7 @@
     "build": "npm run build -ws --if-present",
     "db:push": "npm run db:push -w @call-pat/api",
     "db:seed": "npm run db:seed -w @call-pat/api",
-    "test": "npm run test -w @call-pat/api"
+    "test": "npm run test -w @call-pat/api && npm run test -w @call-pat/web-admin"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",

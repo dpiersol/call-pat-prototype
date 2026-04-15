@@ -38,10 +38,13 @@ export default function Login() {
 
   return (
     <div className="card login-card">
-      <div className="city-badge">🏜️</div>
+      <div className="product-lockup" aria-hidden>
+        <span className="see">SEE </span>
+        <span className="that">THAT?</span>
+      </div>
       <h1>Call Pat</h1>
       <p className="muted" style={{ marginBottom: "1.2rem" }}>
-        City of Albuquerque — Employee Reporting
+        City Employee Issue Reporting
         <br />
         <small>Demo mode &middot; production will use @cabq.gov SSO</small>
       </p>
