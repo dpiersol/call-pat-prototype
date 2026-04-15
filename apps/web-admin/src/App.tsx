@@ -1,4 +1,6 @@
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import BrandWordmark from "./components/BrandWordmark";
+import { headerVariantFor, layoutClassFor } from "./layoutTheme";
 import Login from "./pages/Login";
 import Queue from "./pages/Queue";
 import ReportDetail from "./pages/ReportDetail";
@@ -18,48 +20,53 @@ function RootRedirect() {
 
 export default function App() {
   const { token, role, clear } = useSession();
+  const location = useLocation();
   const isEmployee = role === "employee";
   const isStaff = role === "dispatcher" || role === "admin";
+  const headerVariant = headerVariantFor(location.pathname, role, !!token);
+  const brandTarget = isEmployee ? "/reporter" : isStaff ? "/queue" : "/login";
 
   return (
     <>
-      <header className="app-header">
-        <Link to="/" className="brand">
-          <span className="logo-icon">🌶️</span>
-          <span>
-            Call Pat
-            <span className="tagline"> — City of Albuquerque</span>
-          </span>
-        </Link>
-        {token && (
-          <>
-            <nav>
-              {isEmployee && (
-                <>
-                  <Link to="/reporter">Home</Link>
-                  <Link to="/reporter/new">New Report</Link>
-                  <Link to="/reporter/my-reports">My Reports</Link>
-                </>
-              )}
-              {isStaff && <Link to="/queue">Queue</Link>}
-            </nav>
-            <span className="user-info">
-              {role}
-              <button
-                type="button"
-                className="signout-btn"
-                onClick={() => {
-                  clear();
-                  window.location.href = "/login";
-                }}
-              >
-                Sign out
-              </button>
+      {headerVariant !== "none" && (
+        <header className={`app-header app-header--${headerVariant}`}>
+          <Link to={brandTarget} className="brand">
+            <BrandWordmark tone={headerVariant === "staff" ? "on-red" : "on-blue"} />
+            <span className="brand-product">
+              Call Pat
+              <span className="tagline">City of Albuquerque</span>
             </span>
-          </>
-        )}
-      </header>
-      <div className="layout">
+          </Link>
+          {token && (
+            <>
+              <nav>
+                {isEmployee && (
+                  <>
+                    <Link to="/reporter">Home</Link>
+                    <Link to="/reporter/new">New Report</Link>
+                    <Link to="/reporter/my-reports">My Reports</Link>
+                  </>
+                )}
+                {isStaff && <Link to="/queue">Queue</Link>}
+              </nav>
+              <span className="user-info">
+                {role}
+                <button
+                  type="button"
+                  className="signout-btn"
+                  onClick={() => {
+                    clear();
+                    window.location.href = "/login";
+                  }}
+                >
+                  Sign out
+                </button>
+              </span>
+            </>
+          )}
+        </header>
+      )}
+      <div className={layoutClassFor(location.pathname)}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<RootRedirect />} />

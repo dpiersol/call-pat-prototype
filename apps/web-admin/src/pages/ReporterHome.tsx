@@ -1,21 +1,29 @@
 import { Link } from "react-router-dom";
+import heroArt from "../assets/see-that-montoya.png";
 import { randomQuip } from "../ui";
 
 export default function ReporterHome() {
   return (
     <div>
       <div className="hero-card card">
-        <h1>🌵 Hey there, Burqueño!</h1>
+        <img src={heroArt} alt="" width={520} height={200} className="hero-art" decoding="async" />
+        <h1>
+          <span className="hero-see">SEE </span>
+          <span className="hero-that">THAT?</span>
+          <span style={{ display: "block", fontSize: "0.92em", marginTop: "0.35rem", fontWeight: 600 }}>
+            Report an issue in Burque
+          </span>
+        </h1>
         <p>
-          See a pothole on Central? Graffiti near the Rail Runner? Needles at
-          the park? Snap a photo, drop a pin, and let us handle it.
+          Help keep Albuquerque clean and safe — snap a photo, drop a pin, and
+          we will route it to the right crew.
         </p>
         <div className="hero-actions">
           <Link className="hero-primary" to="/reporter/new">
-            📸 New Report
+            Report an issue
           </Link>
           <Link className="hero-secondary" to="/reporter/my-reports">
-            📋 My Reports
+            My reports
           </Link>
         </div>
       </div>

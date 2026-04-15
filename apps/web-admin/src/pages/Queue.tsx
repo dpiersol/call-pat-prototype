@@ -27,11 +27,16 @@ export default function Queue() {
 
   return (
     <div>
-      <div className="row" style={{ marginBottom: "1rem" }}>
-        <h1 style={{ margin: 0 }}>
-          📋 Report Queue
-          {count > 0 && <span className="count-pill">{count}</span>}
-        </h1>
+      <div className="staff-page-head">
+        <div className="staff-page-head-main">
+          <h1>
+            Admin dashboard
+            {count > 0 && <span className="count-pill">{count}</span>}
+          </h1>
+          <p className="staff-page-sub">Triage and assign reported issues</p>
+        </div>
+      </div>
+      <div className="filter-toolbar">
         <label className="muted">
           Status{" "}
           <select value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -48,7 +53,9 @@ export default function Queue() {
           <select value={category} onChange={(e) => setCategory(e.target.value)}>
             <option value="">All</option>
             {REPORT_CATEGORY_OPTIONS.map((c) => (
-              <option key={c} value={c}>{c}</option>
+              <option key={c} value={c}>
+                {c}
+              </option>
             ))}
           </select>
         </label>
@@ -56,7 +63,7 @@ export default function Queue() {
       {q.isLoading && <p className="muted">Loading…</p>}
       {q.error && <p style={{ color: "var(--cabq-danger)" }}>{String(q.error)}</p>}
       {q.data && (
-        <div className="card" style={{ padding: 0, overflow: "auto" }}>
+        <div className="card card--panel" style={{ padding: 0, overflow: "auto" }}>
           <table>
             <thead>
               <tr>

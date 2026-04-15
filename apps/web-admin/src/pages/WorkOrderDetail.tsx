@@ -7,7 +7,12 @@ import { useSession } from "../session";
 import { badgeClass } from "../ui";
 
 const STATUSES: WorkOrderStatus[] = [
-  "new", "triaged", "assigned", "in_progress", "resolved", "closed",
+  "new",
+  "triaged",
+  "assigned",
+  "in_progress",
+  "resolved",
+  "closed",
 ];
 
 export default function WorkOrderDetail() {
@@ -23,8 +28,7 @@ export default function WorkOrderDetail() {
   });
 
   const mut = useMutation({
-    mutationFn: (status: WorkOrderStatus) =>
-      patchWorkOrder(token!, id!, { status, note }),
+    mutationFn: (status: WorkOrderStatus) => patchWorkOrder(token!, id!, { status, note }),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["work-order", id, token] });
       qc.invalidateQueries({ queryKey: ["admin-reports"] });
@@ -33,28 +37,51 @@ export default function WorkOrderDetail() {
 
   if (!id || !token) return null;
 
+  const wo = q.data;
+
   return (
     <div>
-      <p><Link to="/queue">← Queue</Link></p>
+      <div className="staff-page-head">
+        <div className="staff-page-head-main">
+          <h1>{wo?.title ?? "Work order"}</h1>
+          <p className="staff-page-sub">
+            {wo
+              ? `${wo.status} · ${wo.priority} priority · ${wo.owningOrg}`
+              : "Loading…"}
+          </p>
+        </div>
+        <Link className="staff-back-link" to="/queue">
+          ← Queue
+        </Link>
+      </div>
+
       {q.isLoading && <p className="muted">Loading…</p>}
       {q.error && <p style={{ color: "var(--cabq-danger)" }}>{String(q.error)}</p>}
-      {q.data && (
-        <div className="card">
-          <h1 style={{ marginTop: 0 }}>🔧 {q.data.title}</h1>
-          <p>
-            <span className={badgeClass(q.data.status)}>{q.data.status}</span>
-            {" "}&middot; Priority {q.data.priority} &middot; {q.data.owningOrg}
-          </p>
-          {q.data.assignee && <p>Assignee: {q.data.assignee}</p>}
-          {q.data.createdFromReportId && (
+      {wo && (
+        <div className="card card--panel">
+          <div className="report-meta">
+            <span className={badgeClass(wo.status)}>{wo.status}</span>
+          </div>
+          {wo.assignee && (
             <p>
-              From report:{" "}
-              <Link to={`/reports/${q.data.createdFromReportId}`}>
-                {q.data.createdFromReportId}
-              </Link>
+              <strong>Assignee:</strong> {wo.assignee}
             </p>
           )}
-          <div className="row" style={{ marginTop: 12 }}>
+          {wo.createdFromReportId && (
+            <p>
+              From report:{" "}
+              <Link to={`/reports/${wo.createdFromReportId}`}>{wo.createdFromReportId}</Link>
+            </p>
+          )}
+
+          <div
+            className="row"
+            style={{
+              marginTop: 12,
+              paddingTop: 12,
+              borderTop: "1px solid var(--cabq-border-light)",
+            }}
+          >
             <label className="muted">
               Advance status{" "}
               <select
@@ -64,19 +91,30 @@ export default function WorkOrderDetail() {
                 }}
                 defaultValue=""
               >
-                <option value="" disabled>Select transition…</option>
-                {STATUSES.filter((s) => s !== q.data.status).map((s) => (
-                  <option key={s} value={s}>{s}</option>
+                <option value="" disabled>
+                  Select transition…
+                </option>
+                {STATUSES.filter((s) => s !== wo.status).map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
                 ))}
               </select>
             </label>
-            <input placeholder="Note (optional)" value={note ?? ""} onChange={(e) => setNote(e.target.value || null)} />
+            <input
+              placeholder="Note (optional)"
+              value={note ?? ""}
+              onChange={(e) => setNote(e.target.value || null)}
+              style={{ minWidth: "12rem", flex: "1 1 160px" }}
+            />
           </div>
           {mut.error && <p style={{ color: "var(--cabq-danger)" }}>{String(mut.error)}</p>}
 
-          <h2>📜 Timeline</h2>
+          <h2 className="section-title" style={{ marginTop: "1.25rem" }}>
+            Timeline
+          </h2>
           <ul className="timeline">
-            {(q.data.statusEvents ?? []).map((ev) => (
+            {(wo.statusEvents ?? []).map((ev) => (
               <li key={ev.id}>
                 <strong>{ev.toStatus}</strong>{" "}
                 <span className="muted">{new Date(ev.createdAt).toLocaleString()}</span>

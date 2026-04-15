@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, type FormEvent } from "react";
+import heroArt from "../assets/see-that-montoya.png";
 import { demoLogin } from "../api";
 import { useSession } from "../session";
 import type { DemoLoginRequest } from "@call-pat/shared";
@@ -30,7 +31,13 @@ export default function Login() {
         nav("/queue", { replace: true });
       }
     } catch (e: unknown) {
-      setErr(e instanceof Error ? e.message : "Login failed");
+      if (e instanceof TypeError) {
+        setErr(
+          "Cannot reach the API. From the repo root run `npm run dev -w @call-pat/api` (port 8787), then try again. Or set VITE_API_URL in `.env`.",
+        );
+      } else {
+        setErr(e instanceof Error ? e.message : "Login failed");
+      }
     } finally {
       setLoading(false);
     }
@@ -38,10 +45,21 @@ export default function Login() {
 
   return (
     <div className="card login-card">
-      <div className="city-badge">🏜️</div>
+      <img
+        src={heroArt}
+        alt="See That? Call Pat"
+        width={440}
+        height={170}
+        className="login-hero-art"
+        decoding="async"
+      />
+      <div className="product-lockup" aria-hidden>
+        <span className="see">SEE </span>
+        <span className="that">THAT?</span>
+      </div>
       <h1>Call Pat</h1>
       <p className="muted" style={{ marginBottom: "1.2rem" }}>
-        City of Albuquerque — Employee Reporting
+        City Employee Issue Reporting
         <br />
         <small>Demo mode &middot; production will use @cabq.gov SSO</small>
       </p>
