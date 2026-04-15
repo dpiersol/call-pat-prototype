@@ -19,34 +19,42 @@ export default function ReporterReportDetail() {
 
   if (!id || !token) return null;
 
+  const r = reportQ.data;
+
   return (
     <div>
-      <p><Link to="/reporter/my-reports">← My reports</Link></p>
+      <div className="reporter-page-head reporter-page-head--detail">
+        <div className="reporter-page-head-main">
+          <h1>{r?.title ?? "Report"}</h1>
+          <p className="reporter-page-sub">
+            {r ? `${r.category} · ${id}` : "Loading report…"}
+          </p>
+        </div>
+        <Link className="reporter-back-link" to="/reporter/my-reports">
+          ← My reports
+        </Link>
+      </div>
+
       {reportQ.isLoading && <p className="muted">Loading…</p>}
       {reportQ.error && <p style={{ color: "var(--cabq-danger)" }}>{String(reportQ.error)}</p>}
-      {reportQ.data && (
+      {r && (
         <>
-          <div className="card">
-            <h1 style={{ marginTop: 0 }}>{reportQ.data.title}</h1>
-            <p>
-              {reportQ.data.category} &middot;{" "}
-              <span className={badgeClass(reportQ.data.status)}>{reportQ.data.status}</span>
-            </p>
-            <p style={{ whiteSpace: "pre-wrap" }}>{reportQ.data.description}</p>
+          <div className="card card--panel">
+            <div className="report-meta">
+              <span className={badgeClass(r.status)}>{r.status}</span>
+              <span className="muted">Submitted {new Date(r.createdAt).toLocaleString()}</span>
+            </div>
+            <p className="report-body">{r.description}</p>
             <p className="muted">
               📍{" "}
-              {reportQ.data.addressText ??
-                `${reportQ.data.lat ?? "—"}, ${reportQ.data.lng ?? "—"}`}{" "}
-              ({reportQ.data.locationSource})
+              {r.addressText ?? `${r.lat ?? "—"}, ${r.lng ?? "—"}`} ({r.locationSource})
             </p>
-            {imageSrc && (
-              <img src={imageSrc} alt="Report" style={{ maxWidth: "100%", borderRadius: 8, marginTop: 8 }} />
-            )}
+            {imageSrc && <img src={imageSrc} alt="Report" className="report-photo" />}
           </div>
-          <div className="card">
-            <h2 style={{ marginTop: 0 }}>📜 Status Timeline</h2>
+          <div className="card card--panel">
+            <h2 className="section-title">Status timeline</h2>
             <ul className="timeline">
-              {(reportQ.data.statusEvents ?? []).map((ev) => (
+              {(r.statusEvents ?? []).map((ev) => (
                 <li key={ev.id}>
                   <strong>{ev.toStatus}</strong>{" "}
                   <span className="muted">{new Date(ev.createdAt).toLocaleString()}</span>

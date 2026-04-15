@@ -19,6 +19,7 @@ All notable changes to this project are documented in this file.
 - The web admin header now reflects role: field employees see the blue “See That?” style shell; dispatchers and admins see the red admin-style shell (per Figma `Landing` / `Admin` pages).
 - Login is a full-viewport gradient page without the main chrome bar, matching the Figma landing/submit flow.
 - Global CSS tokens and components updated toward Figma palette (`#5DADE2` / `#3498DB` blues, `#D4183D` / `#B01530` reds) while preserving existing class names used by reports and tables.
+- Further UI polish: staff report/work-order detail headers match the queue strip; reporter list/detail/new-report use the blue page band, back links, elevated cards (`.card--panel`), filter toolbar on the queue, and a cleaner stacked new-report form (`.form-stack`).
 
 ### Notes
 

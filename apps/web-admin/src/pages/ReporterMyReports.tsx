@@ -14,13 +14,26 @@ export default function ReporterMyReports() {
 
   if (!token) return null;
 
+  const n = q.data?.reports.length ?? 0;
+
   return (
     <div>
-      <h1 style={{ marginTop: 0 }}>📋 My Reports</h1>
+      <div className="reporter-page-head">
+        <div className="reporter-page-head-main">
+          <h1>My reports</h1>
+          <p className="reporter-page-sub">
+            {n === 0 ? "Nothing submitted yet." : `${n} report${n === 1 ? "" : "s"} on file.`}
+          </p>
+        </div>
+        <Link className="reporter-back-link" to="/reporter">
+          ← Home
+        </Link>
+      </div>
+
       {q.isLoading && <p className="muted">Loading…</p>}
       {q.error && <p style={{ color: "var(--cabq-danger)" }}>{String(q.error)}</p>}
       {q.data && (
-        <div className="card" style={{ padding: 0, overflow: "auto" }}>
+        <div className="card card--panel" style={{ padding: 0, overflow: "auto" }}>
           <table>
             <thead>
               <tr>
@@ -36,9 +49,15 @@ export default function ReporterMyReports() {
                 <tr key={r.id}>
                   <td className="muted">{new Date(r.createdAt).toLocaleDateString()}</td>
                   <td>{r.category}</td>
-                  <td><strong>{r.title}</strong></td>
-                  <td><span className={badgeClass(r.status)}>{r.status}</span></td>
-                  <td><Link to={`/reporter/reports/${r.id}`}>Open →</Link></td>
+                  <td>
+                    <strong>{r.title}</strong>
+                  </td>
+                  <td>
+                    <span className={badgeClass(r.status)}>{r.status}</span>
+                  </td>
+                  <td>
+                    <Link to={`/reporter/reports/${r.id}`}>Open →</Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -46,7 +65,9 @@ export default function ReporterMyReports() {
           {q.data.reports.length === 0 && (
             <div className="empty-state">
               <div className="empty-icon">🌄</div>
-              <p>No reports yet. <Link to="/reporter/new">Submit your first one!</Link></p>
+              <p>
+                No reports yet. <Link to="/reporter/new">Submit your first one</Link>
+              </p>
             </div>
           )}
         </div>

@@ -1,5 +1,5 @@
 import { REPORT_CATEGORY_OPTIONS } from "@call-pat/shared";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, type FormEvent } from "react";
 import { submitReport } from "../api";
 import { useSession } from "../session";
@@ -46,50 +46,64 @@ export default function ReporterNewReport() {
 
   return (
     <div>
-      <div style={{ marginBottom: "1rem" }}>
-        <h1 className="form-page-title" style={{ marginTop: 0 }}>
-          REPORT AN <span className="emph">ISSUE</span>
-        </h1>
-        <p className="form-page-lede">
-          Add a photo, category, and location so dispatch can triage your report.
-        </p>
+      <div className="reporter-page-head reporter-page-head--form">
+        <div className="reporter-page-head-main">
+          <h1 className="form-page-title">
+            REPORT AN <span className="emph">ISSUE</span>
+          </h1>
+          <p className="form-page-lede">
+            Add a photo, category, and location so dispatch can triage your report.
+          </p>
+        </div>
+        <Link className="reporter-back-link" to="/reporter">
+          ← Home
+        </Link>
       </div>
-      <form className="card" onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 10, borderRadius: 16, padding: "1.25rem 1.35rem" }}>
-        <label className="muted">Photo (required)</label>
+
+      <form className="card card--panel form-stack" onSubmit={onSubmit}>
+        <label className="muted field-label">Photo (required)</label>
         <input
           type="file"
           accept="image/jpeg,image/png,image/webp"
           onChange={(e) => setFile(e.target.files?.[0] ?? null)}
         />
 
-        <label className="muted">Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ width: "100%" }}>
+        <label className="muted field-label">Category</label>
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
           {REPORT_CATEGORY_OPTIONS.map((c) => (
-            <option key={c} value={c}>{c}</option>
+            <option key={c} value={c}>
+              {c}
+            </option>
           ))}
         </select>
 
-        <label className="muted">Short title</label>
-        <input required value={title} onChange={(e) => setTitle(e.target.value)} style={{ width: "100%", padding: 8 }} />
+        <label className="muted field-label">Short title</label>
+        <input required value={title} onChange={(e) => setTitle(e.target.value)} />
 
-        <label className="muted">Description — what did you see?</label>
-        <textarea required value={description} onChange={(e) => setDescription(e.target.value)} rows={4} style={{ width: "100%", padding: 8 }} />
+        <label className="muted field-label">Description — what did you see?</label>
+        <textarea required value={description} onChange={(e) => setDescription(e.target.value)} rows={4} />
 
-        <p className="muted" style={{ margin: 0 }}>
-          📍 Location — adjust lat/lng or add a cross street
+        <p className="muted" style={{ margin: "0.25rem 0 0" }}>
+          Location — adjust coordinates or add a cross street
         </p>
-        <div className="row">
-          <label>Lat <input value={lat} onChange={(e) => setLat(e.target.value)} style={{ width: 120 }} /></label>
-          <label>Lng <input value={lng} onChange={(e) => setLng(e.target.value)} style={{ width: 120 }} /></label>
+        <div className="coord-row">
+          <label>
+            Lat <input value={lat} onChange={(e) => setLat(e.target.value)} />
+          </label>
+          <label>
+            Lng <input value={lng} onChange={(e) => setLng(e.target.value)} />
+          </label>
         </div>
 
-        <label className="muted">Cross street / address (optional)</label>
-        <input value={addressText} onChange={(e) => setAddressText(e.target.value)} style={{ width: "100%", padding: 8 }} />
+        <label className="muted field-label">Cross street / address (optional)</label>
+        <input value={addressText} onChange={(e) => setAddressText(e.target.value)} />
 
         {err && <p style={{ color: "var(--cabq-danger)" }}>{err}</p>}
-        <button className="primary" type="submit" disabled={loading} style={{ padding: "0.7rem" }}>
-          {loading ? "Submitting…" : "🚀 Submit Report"}
-        </button>
+        <div className="submit-row">
+          <button className="primary" type="submit" disabled={loading}>
+            {loading ? "Submitting…" : "Submit report"}
+          </button>
+        </div>
       </form>
     </div>
   );

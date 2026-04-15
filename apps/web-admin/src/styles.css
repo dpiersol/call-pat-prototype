@@ -217,6 +217,9 @@ a { color: var(--cabq-teal); }
   margin-bottom: 1rem;
   box-shadow: 0 1px 3px rgba(0,0,0,.05);
 }
+.card > :is(h1, h2):first-child {
+  margin-top: 0;
+}
 
 /* ===== Rows ===== */
 .row {
@@ -441,6 +444,11 @@ tbody tr:hover { background: rgba(52,152,219,.06); }
 
 /* ===== Staff queue heading (Figma Admin hero strip, lightweight) ===== */
 .staff-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
   background: linear-gradient(90deg, var(--cabq-red) 0%, var(--cabq-red-dark) 100%);
   color: #fff;
   border-radius: 12px;
@@ -448,14 +456,198 @@ tbody tr:hover { background: rgba(52,152,219,.06); }
   margin-bottom: 1.25rem;
   box-shadow: 0 8px 24px rgba(180,21,48,.2);
 }
+.staff-page-head-main {
+  flex: 1;
+  min-width: min(100%, 220px);
+}
 .staff-page-head h1 {
   margin: 0;
   font-size: 1.35rem;
+  line-height: 1.25;
+  max-width: 100%;
+}
+/* Long titles only (detail pages — avoid clamping dashboard h1 with pill) */
+.staff-page-head-main h1:not(:has(.count-pill)) {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .staff-page-head .staff-page-sub {
   margin: 0.35rem 0 0;
   font-size: 0.88rem;
   opacity: 0.9;
+}
+.staff-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.45);
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .15s, border-color .15s;
+}
+.staff-back-link:hover {
+  background: rgba(0,0,0,.12);
+  border-color: rgba(255,255,255,.65);
+}
+
+/* ===== Reporter page strip (pairs with staff-page-head) ===== */
+.reporter-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  background: linear-gradient(135deg, var(--cabq-blue-light) 0%, var(--cabq-blue) 100%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 8px 24px rgba(52,152,219,.22);
+}
+.reporter-page-head-main {
+  flex: 1;
+  min-width: min(100%, 220px);
+}
+.reporter-page-head h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  font-weight: 800;
+  max-width: 100%;
+}
+.reporter-page-head--detail h1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.reporter-page-head .reporter-page-sub {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  opacity: 0.92;
+}
+.reporter-page-head .form-page-title {
+  color: #fff;
+  margin: 0;
+  font-size: 1.45rem;
+}
+.reporter-page-head .form-page-title .emph {
+  color: #fecdd3;
+}
+.reporter-page-head .form-page-lede {
+  color: rgba(255,255,255,.92);
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+}
+.reporter-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.45);
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .15s, border-color .15s;
+}
+.reporter-back-link:hover {
+  background: rgba(255,255,255,.15);
+  border-color: rgba(255,255,255,.7);
+}
+
+/* ===== Cards & content blocks ===== */
+.card--panel {
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+  border-color: var(--cabq-border-light);
+}
+.card .section-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--cabq-text);
+  letter-spacing: 0.01em;
+}
+.report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.report-body {
+  white-space: pre-wrap;
+  margin: 0 0 1rem;
+  line-height: 1.55;
+}
+.report-photo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+}
+
+.filter-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--cabq-surface);
+  border: 1px solid var(--cabq-border-light);
+  border-radius: 10px;
+}
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.form-stack .field-label {
+  margin-bottom: -0.35rem;
+}
+.form-stack input[type="text"],
+.form-stack input[type="file"],
+.form-stack select,
+.form-stack textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem 0.65rem;
+}
+.form-stack .coord-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+.form-stack .coord-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.form-stack .coord-row input {
+  width: 7.5rem;
+}
+.form-stack .submit-row {
+  margin-top: 0.35rem;
+}
+.form-stack .submit-row button.primary {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
 }
 
 /* ===== Form page title (Figma SubmitIssue) ===== */

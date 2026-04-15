@@ -58,46 +58,69 @@ export default function ReportDetail() {
 
   if (!id || !token) return null;
 
+  const r = reportQ.data;
+
   return (
     <div>
-      <p><Link to="/queue">← Queue</Link></p>
+      <div className="staff-page-head">
+        <div className="staff-page-head-main">
+          <h1>{r?.title ?? "Report"}</h1>
+          <p className="staff-page-sub">
+            {r ? `${r.category} · ${id}` : "Loading report…"}
+          </p>
+        </div>
+        <Link className="staff-back-link" to="/queue">
+          ← Queue
+        </Link>
+      </div>
+
       {reportQ.isLoading && <p className="muted">Loading…</p>}
       {reportQ.error && <p style={{ color: "var(--cabq-danger)" }}>{String(reportQ.error)}</p>}
-      {reportQ.data && (
+      {r && (
         <>
-          <div className="card">
-            <h1 style={{ marginTop: 0 }}>{reportQ.data.title}</h1>
-            <p>
-              {reportQ.data.category} &middot;{" "}
-              <span className={badgeClass(reportQ.data.status)}>{reportQ.data.status}</span>
-            </p>
-            <p style={{ whiteSpace: "pre-wrap" }}>{reportQ.data.description}</p>
+          <div className="card card--panel">
+            <div className="report-meta">
+              <span className={badgeClass(r.status)}>{r.status}</span>
+              <span className="muted">
+                Submitted {new Date(r.createdAt).toLocaleString()}
+              </span>
+            </div>
+            <p className="report-body">{r.description}</p>
             <p className="muted">
               📍{" "}
-              {reportQ.data.addressText ??
-                `${reportQ.data.lat ?? "—"}, ${reportQ.data.lng ?? "—"}`}{" "}
-              ({reportQ.data.locationSource})
+              {r.addressText ?? `${r.lat ?? "—"}, ${r.lng ?? "—"}`} ({r.locationSource})
             </p>
             {imageSrc && (
-              <img src={imageSrc} alt="Report attachment" style={{ maxWidth: "100%", borderRadius: 8, marginTop: 8 }} />
+              <img src={imageSrc} alt="Report attachment" className="report-photo" />
             )}
           </div>
 
-          <div className="card">
-            <h2 style={{ marginTop: 0 }}>🔧 Work Order</h2>
-            {reportQ.data.workOrderId ? (
+          <div className="card card--panel">
+            <h2 className="section-title">Work order</h2>
+            {r.workOrderId ? (
               <p>
                 Linked:{" "}
-                <Link to={`/work-orders/${reportQ.data.workOrderId}`}>
-                  {reportQ.data.workOrderId}
-                </Link>
+                <Link to={`/work-orders/${r.workOrderId}`}>{r.workOrderId}</Link>
               </p>
             ) : (
               <>
                 <div className="row" style={{ marginBottom: 8 }}>
-                  <input value={woTitle} onChange={(e) => setWoTitle(e.target.value)} placeholder="Title" />
-                  <input value={woOrg} onChange={(e) => setWoOrg(e.target.value)} placeholder="Owning org" />
-                  <button className="primary" type="button" disabled={createWo.isPending} onClick={() => createWo.mutate()}>
+                  <input
+                    value={woTitle}
+                    onChange={(e) => setWoTitle(e.target.value)}
+                    placeholder="Title"
+                  />
+                  <input
+                    value={woOrg}
+                    onChange={(e) => setWoOrg(e.target.value)}
+                    placeholder="Owning org"
+                  />
+                  <button
+                    className="primary"
+                    type="button"
+                    disabled={createWo.isPending}
+                    onClick={() => createWo.mutate()}
+                  >
                     Create work order
                   </button>
                 </div>
@@ -105,20 +128,24 @@ export default function ReportDetail() {
                   <select value={linkId} onChange={(e) => setLinkId(e.target.value)}>
                     <option value="">Link existing…</option>
                     {wosQ.data?.workOrders.map((w) => (
-                      <option key={w.id} value={w.id}>{w.title} ({w.status})</option>
+                      <option key={w.id} value={w.id}>
+                        {w.title} ({w.status})
+                      </option>
                     ))}
                   </select>
-                  <button type="button" disabled={!linkId || linkWo.isPending} onClick={() => linkWo.mutate()}>Link</button>
+                  <button type="button" disabled={!linkId || linkWo.isPending} onClick={() => linkWo.mutate()}>
+                    Link
+                  </button>
                 </div>
               </>
             )}
             {createWo.error && <p style={{ color: "var(--cabq-danger)" }}>{String(createWo.error)}</p>}
           </div>
 
-          <div className="card">
-            <h2 style={{ marginTop: 0 }}>📜 Status Timeline</h2>
+          <div className="card card--panel">
+            <h2 className="section-title">Status timeline</h2>
             <ul className="timeline">
-              {(reportQ.data.statusEvents ?? []).map((ev) => (
+              {(r.statusEvents ?? []).map((ev) => (
                 <li key={ev.id}>
                   <strong>{ev.toStatus}</strong>{" "}
                   <span className="muted">{new Date(ev.createdAt).toLocaleString()}</span>
