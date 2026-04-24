@@ -1,0 +1,14 @@
+{
+  "appName": "Call PAT prototype",
+  "progress": {
+    "phase": "Prototyping",
+    "percentComplete": 20,
+    "summary": "Progress and file-level notes for the call PAT prototype. Refine phase and completion as scope firms up; add file rows from the progress dashboard or by editing this JSON.",
+    "milestones": [
+      { "name": "Prototype scaffold", "done": true },
+      { "name": "End-to-end demo path", "done": false },
+      { "name": "Stakeholder review", "done": false }
+    ]
+  },
+  "files": []
+}
