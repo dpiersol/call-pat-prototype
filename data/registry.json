@@ -5,10 +5,1220 @@
     "percentComplete": 20,
     "summary": "Progress and file-level notes for the call PAT prototype. Refine phase and completion as scope firms up; add file rows from the progress dashboard or by editing this JSON.",
     "milestones": [
-      { "name": "Prototype scaffold", "done": true },
-      { "name": "End-to-end demo path", "done": false },
-      { "name": "Stakeholder review", "done": false }
+      {
+        "name": "Prototype scaffold",
+        "done": true
+      },
+      {
+        "name": "End-to-end demo path",
+        "done": false
+      },
+      {
+        "name": "Stakeholder review",
+        "done": false
+      }
     ]
   },
-  "files": []
+  "files": [
+    {
+      "path": ".github/workflows/deploy.yml",
+      "purpose": "─────────────────────────────────────────────────────────────────────────────",
+      "createdAt": "2026-04-14T09:51:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T10:29:48-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": ".gitignore",
+      "purpose": "Git ignore rules for build output and local-only files.",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:47:53-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "purpose": "Changelog",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:32:58-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "README.md",
+      "purpose": "Project readme and setup documentation.",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T11:13:29-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "agents.md",
+      "purpose": "Agent and collaborator conventions",
+      "createdAt": "2026-04-02T09:32:03-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-02T09:32:03-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/.env.example",
+      "purpose": "Source file: apps/mobile/.env.example",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/app.config.js",
+      "purpose": "@ts-check",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/app.json",
+      "purpose": "JSON data or config: apps/mobile/app.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:32:58-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/app/_layout.tsx",
+      "purpose": "React component or page: apps/mobile/app/_layout.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/app/index.tsx",
+      "purpose": "React component or page: apps/mobile/app/index.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/app/login.tsx",
+      "purpose": "React component or page: apps/mobile/app/login.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/app/my-reports.tsx",
+      "purpose": "React component or page: apps/mobile/app/my-reports.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/app/new-report.tsx",
+      "purpose": "React component or page: apps/mobile/app/new-report.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/app/report/[id].tsx",
+      "purpose": "React component or page: apps/mobile/app/report/[id].tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/babel.config.js",
+      "purpose": "Source file: apps/mobile/babel.config.js",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/config/expo.android.js",
+      "purpose": "Android-only Expo config (merged in app.config.js).",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/config/expo.ios.js",
+      "purpose": "iOS-only Expo config (merged in app.config.js).",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/docs/ASSETS_ANDROID.md",
+      "purpose": "Android adaptive icon (optional)",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/docs/ASSETS_IOS.md",
+      "purpose": "iOS / Expo image assets",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/docs/BUILD_ANDROID.md",
+      "purpose": "Android builds (Google Play)",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T11:04:59-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/docs/BUILD_IOS.md",
+      "purpose": "Building and releasing iOS (TestFlight / App Store)",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T11:04:59-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/docs/MONITORING_EAS.md",
+      "purpose": "Where to see EAS build progress and reports",
+      "createdAt": "2026-04-01T11:04:59-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T11:04:59-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/eas.json",
+      "purpose": "JSON data or config: apps/mobile/eas.json",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/expo-env.d.ts",
+      "purpose": "/ <reference types=\"expo/types\" />",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/lib/api.ts",
+      "purpose": "TypeScript module: apps/mobile/lib/api.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/lib/auth.tsx",
+      "purpose": "React component or page: apps/mobile/lib/auth.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/lib/theme.ts",
+      "purpose": "Single design system for iOS and Android (Expo / React Native).",
+      "createdAt": "2026-04-01T10:40:18-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T10:40:18-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/metro.config.js",
+      "purpose": "Source file: apps/mobile/metro.config.js",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/package-lock.json",
+      "purpose": "JSON data or config: apps/mobile/package-lock.json",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T11:04:59-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/package.json",
+      "purpose": "JSON data or config: apps/mobile/package.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:32:58-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/mobile/tsconfig.json",
+      "purpose": "JSON data or config: apps/mobile/tsconfig.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/.env.example",
+      "purpose": "Optional. Leave unset in local dev: the web app calls `/auth`, `/reports`, etc.",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T10:59:50-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/index.html",
+      "purpose": "HTML document: apps/web-admin/index.html",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/package.json",
+      "purpose": "JSON data or config: apps/web-admin/package.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:32:58-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/public/web.config",
+      "purpose": "Source file: apps/web-admin/public/web.config",
+      "createdAt": "2026-04-14T09:51:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T09:51:22-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/App.tsx",
+      "purpose": "React component or page: apps/web-admin/src/App.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/api.ts",
+      "purpose": "TypeScript module: apps/web-admin/src/api.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T10:59:50-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/assets/see-that-montoya.png",
+      "purpose": "Source file: apps/web-admin/src/assets/see-that-montoya.png",
+      "createdAt": "2026-04-14T18:34:28-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:34:28-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/components/BrandWordmark.test.tsx",
+      "purpose": "React component or page: apps/web-admin/src/components/BrandWordmark.test.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/components/BrandWordmark.tsx",
+      "purpose": "“ONE ALBUQUERQUE” treatment aligned with Figma exports (Landing / SubmitIssue headers).",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/hooks/useBlobImage.ts",
+      "purpose": "TypeScript module: apps/web-admin/src/hooks/useBlobImage.ts",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T13:29:22-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/layoutTheme.test.ts",
+      "purpose": "Automated test: layoutTheme.test.ts",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/layoutTheme.ts",
+      "purpose": "TypeScript module: apps/web-admin/src/layoutTheme.ts",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/main.tsx",
+      "purpose": "React component or page: apps/web-admin/src/main.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/pages/Login.tsx",
+      "purpose": "React component or page: apps/web-admin/src/pages/Login.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T10:59:50-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/pages/Queue.tsx",
+      "purpose": "React component or page: apps/web-admin/src/pages/Queue.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:31:33-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/pages/ReportDetail.tsx",
+      "purpose": "React component or page: apps/web-admin/src/pages/ReportDetail.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:31:33-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/pages/ReporterHome.tsx",
+      "purpose": "React component or page: apps/web-admin/src/pages/ReporterHome.tsx",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:34:28-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/pages/ReporterMyReports.tsx",
+      "purpose": "React component or page: apps/web-admin/src/pages/ReporterMyReports.tsx",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:31:33-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/pages/ReporterNewReport.tsx",
+      "purpose": "React component or page: apps/web-admin/src/pages/ReporterNewReport.tsx",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:31:33-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/pages/ReporterReportDetail.tsx",
+      "purpose": "React component or page: apps/web-admin/src/pages/ReporterReportDetail.tsx",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:31:33-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/pages/WorkOrderDetail.tsx",
+      "purpose": "React component or page: apps/web-admin/src/pages/WorkOrderDetail.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:31:33-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/session.tsx",
+      "purpose": "React component or page: apps/web-admin/src/session.tsx",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/styles.css",
+      "purpose": "{ box-sizing: border-box; }",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:31:33-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/test/setup.ts",
+      "purpose": "TypeScript module: apps/web-admin/src/test/setup.ts",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/ui.ts",
+      "purpose": "TypeScript module: apps/web-admin/src/ui.ts",
+      "createdAt": "2026-04-01T15:01:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T15:01:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/src/vite-env.d.ts",
+      "purpose": "/ <reference types=\"vite/client\" />",
+      "createdAt": "2026-03-31T10:47:53-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:47:53-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/tsconfig.json",
+      "purpose": "JSON data or config: apps/web-admin/tsconfig.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/tsconfig.node.json",
+      "purpose": "JSON data or config: apps/web-admin/tsconfig.node.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "apps/web-admin/vite.config.ts",
+      "purpose": "Same-origin in dev (api.ts uses \"\" as base) — avoids cross-origin / mixed issues.",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T10:59:50-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "current_task.md",
+      "purpose": "Current task",
+      "createdAt": "2026-04-02T09:32:03-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-02T09:32:03-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "data/registry.json",
+      "purpose": "Application progress registry (phases, milestones, per-file purposes).",
+      "createdAt": "2026-04-24T13:09:52-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-24T13:09:52-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "deployment/deploy.ps1",
+      "purpose": "DEV (called automatically by GitHub Actions):",
+      "createdAt": "2026-04-14T09:51:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T10:29:48-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "deployment/server-setup.ps1",
+      "purpose": "Requires -RunAsAdministrator",
+      "createdAt": "2026-04-14T09:51:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T10:29:48-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "docs/DEPLOYMENT_AND_IDENTITY.md",
+      "purpose": "Backend deployment and identity (city employees)",
+      "createdAt": "2026-04-01T11:13:29-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T11:13:29-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "docs/REVIEW.md",
+      "purpose": "Call Pat prototype — review guide",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T11:13:29-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "docs/SETUP.md",
+      "purpose": "Environment setup log (Call Pat prototype)",
+      "createdAt": "2026-03-31T10:47:53-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T12:59:02-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "ecosystem.config.cjs",
+      "purpose": "PM2 ecosystem config for the Call Pat Prototype (Hono API).",
+      "createdAt": "2026-04-14T09:51:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T09:51:22-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/ATTRIBUTIONS.md",
+      "purpose": "Markdown documentation: figma/ATTRIBUTIONS.md",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/guidelines/Guidelines.md",
+      "purpose": "General guidelines",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/package.json",
+      "purpose": "JSON data or config: figma/package.json",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/postcss.config.mjs",
+      "purpose": "PostCSS Configuration",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/App.tsx",
+      "purpose": "React component or page: figma/src/app/App.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/figma/ImageWithFallback.tsx",
+      "purpose": "React component or page: figma/src/app/components/figma/ImageWithFallback.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/accordion.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/accordion.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/alert-dialog.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/alert-dialog.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/alert.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/alert.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/aspect-ratio.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/aspect-ratio.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/avatar.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/avatar.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/badge.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/badge.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/breadcrumb.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/breadcrumb.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/button.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/button.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/calendar.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/calendar.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/card.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/card.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/carousel.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/carousel.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/chart.tsx",
+      "purpose": "Format: { THEME_NAME: CSS_SELECTOR }",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/checkbox.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/checkbox.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/collapsible.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/collapsible.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/command.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/command.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/context-menu.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/context-menu.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/dialog.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/dialog.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/drawer.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/drawer.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/dropdown-menu.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/dropdown-menu.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/form.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/form.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/hover-card.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/hover-card.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/input-otp.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/input-otp.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/input.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/input.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/label.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/label.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/menubar.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/menubar.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/navigation-menu.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/navigation-menu.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/pagination.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/pagination.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/popover.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/popover.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/progress.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/progress.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/radio-group.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/radio-group.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/resizable.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/resizable.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/scroll-area.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/scroll-area.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/select.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/select.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/separator.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/separator.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/sheet.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/sheet.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/sidebar.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/sidebar.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/skeleton.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/skeleton.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/slider.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/slider.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/sonner.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/sonner.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/switch.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/switch.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/table.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/table.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/tabs.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/tabs.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/textarea.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/textarea.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/toggle-group.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/toggle-group.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/toggle.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/toggle.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/tooltip.tsx",
+      "purpose": "React component or page: figma/src/app/components/ui/tooltip.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/use-mobile.ts",
+      "purpose": "TypeScript module: figma/src/app/components/ui/use-mobile.ts",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/components/ui/utils.ts",
+      "purpose": "TypeScript module: figma/src/app/components/ui/utils.ts",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/pages/Admin.tsx",
+      "purpose": "Mock data",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/pages/Landing.tsx",
+      "purpose": "React component or page: figma/src/app/pages/Landing.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/pages/SubmitIssue.tsx",
+      "purpose": "In a real app, this would submit to backend",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/app/routes.tsx",
+      "purpose": "React component or page: figma/src/app/routes.tsx",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/imports/SEE_THAT_P._Montoya.png",
+      "purpose": "Source file: figma/src/imports/SEE_THAT_P._Montoya.png",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/styles/fonts.css",
+      "purpose": "Stylesheet: figma/src/styles/fonts.css",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/styles/index.css",
+      "purpose": "Stylesheet: figma/src/styles/index.css",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/styles/tailwind.css",
+      "purpose": "Stylesheet: figma/src/styles/tailwind.css",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/src/styles/theme.css",
+      "purpose": "Stylesheet: figma/src/styles/theme.css",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "figma/vite.config.ts",
+      "purpose": "The React and Tailwind plugins are both required for Make, even if",
+      "createdAt": "2026-04-14T18:33:24-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "package-lock.json",
+      "purpose": "Lockfile for reproducible dependency installs.",
+      "createdAt": "2026-03-31T10:47:53-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-14T18:33:24-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "package.json",
+      "purpose": "NPM package metadata, scripts, and dependency declarations.",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:32:58-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/drizzle.config.ts",
+      "purpose": "TypeScript module: packages/api/drizzle.config.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/package.json",
+      "purpose": "JSON data or config: packages/api/package.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:32:58-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/app.ts",
+      "purpose": "TypeScript module: packages/api/src/app.ts",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T13:29:22-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/auth.ts",
+      "purpose": "TypeScript module: packages/api/src/auth.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/db/index.ts",
+      "purpose": "TypeScript module: packages/api/src/db/index.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/db/schema.ts",
+      "purpose": "TypeScript module: packages/api/src/db/schema.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/db/seed.ts",
+      "purpose": "TypeScript module: packages/api/src/db/seed.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-01T15:12:44-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/index.ts",
+      "purpose": "TypeScript module: packages/api/src/index.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T13:29:22-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/lib/mappers.ts",
+      "purpose": "TypeScript module: packages/api/src/lib/mappers.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/smoke.ts",
+      "purpose": "Minimal API smoke check (no test framework — avoids workspace dedupe issues with vitest + Expo).",
+      "createdAt": "2026-03-31T13:29:22-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T13:29:22-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/src/workflows/status.ts",
+      "purpose": "TypeScript module: packages/api/src/workflows/status.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/api/tsconfig.json",
+      "purpose": "JSON data or config: packages/api/tsconfig.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/shared/package.json",
+      "purpose": "JSON data or config: packages/shared/package.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-04-15T17:32:58-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "purpose": "TypeScript module: packages/shared/src/index.ts",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T13:29:22-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "packages/shared/tsconfig.json",
+      "purpose": "JSON data or config: packages/shared/tsconfig.json",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T10:17:46-06:00",
+      "modifiedBy": "dpiersol"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "purpose": "YAML configuration: pnpm-workspace.yaml",
+      "createdAt": "2026-03-31T10:17:46-06:00",
+      "createdBy": "dpiersol",
+      "modifiedAt": "2026-03-31T13:29:22-06:00",
+      "modifiedBy": "dpiersol"
+    }
+  ]
 }
