@@ -22,7 +22,7 @@
   "files": [
     {
       "path": ".github/workflows/deploy.yml",
-      "purpose": "─────────────────────────────────────────────────────────────────────────────",
+      "purpose": "GitHub Actions: Deploy Pipeline",
       "createdAt": "2026-04-14T09:51:22-06:00",
       "createdBy": "dpiersol",
       "modifiedAt": "2026-04-14T10:29:48-06:00",
@@ -513,7 +513,7 @@
       "purpose": "Application progress registry (phases, milestones, per-file purposes).",
       "createdAt": "2026-04-24T13:09:52-06:00",
       "createdBy": "dpiersol",
-      "modifiedAt": "2026-04-24T13:09:52-06:00",
+      "modifiedAt": "2026-04-24T13:23:52-06:00",
       "modifiedBy": "dpiersol"
     },
     {
