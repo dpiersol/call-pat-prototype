@@ -276,6 +276,19 @@ th, td {
 }
 th { font-weight: 600; color: var(--cabq-muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; }
 tbody tr:hover { background: rgba(52,152,219,.06); }
+tbody tr { transition: background .12s ease; }
+
+.queue-table-wrap table tbody td:last-child a {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--cabq-red);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: background .12s;
+}
+.queue-table-wrap table tbody td:last-child a:hover {
+  background: rgba(212,24,61,.1);
+}
 
 /* ===== Utility ===== */
 .muted { color: var(--cabq-muted); font-size: 0.9rem; }
@@ -495,6 +508,28 @@ tbody tr:hover { background: rgba(52,152,219,.06); }
 .staff-back-link:hover {
   background: rgba(0,0,0,.12);
   border-color: rgba(255,255,255,.65);
+}
+
+.staff-refresh-btn {
+  align-self: center;
+  border: 1px solid rgba(255,255,255,.5);
+  background: rgba(255,255,255,.12);
+  color: #fff !important;
+  cursor: pointer;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  transition: background .15s, transform .1s;
+  white-space: nowrap;
+}
+.staff-refresh-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,.22);
+  transform: translateY(-1px);
+}
+.staff-refresh-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
 }
 
 /* ===== Reporter page strip (pairs with staff-page-head) ===== */

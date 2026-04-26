@@ -5,7 +5,6 @@ import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
-  ActivityIndicator,
   Alert,
   Pressable,
   ScrollView,
@@ -15,9 +14,10 @@ import {
   View,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { AppButton } from "../components/ui/AppButton";
 import { submitReport } from "../lib/api";
 import { useAuth } from "../lib/auth";
-import { theme } from "../lib/theme";
+import { cardShadow, theme } from "../lib/theme";
 
 export default function NewReportScreen() {
   const { token } = useAuth();
@@ -125,11 +125,24 @@ export default function NewReportScreen() {
 
   if (!token) return null;
 
+  const stepIndex = step === 0 ? 0 : step === 1 ? 1 : 2;
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.stepsRow}>
+        {["Photo", "Pin", "Details"].map((label, i) => (
+          <View key={label} style={styles.stepItem}>
+            <View style={[styles.stepDot, i <= stepIndex && styles.stepDotOn]}>
+              <Text style={[styles.stepNum, i <= stepIndex && styles.stepNumOn]}>{i + 1}</Text>
+            </View>
+            <Text style={[styles.stepLabel, i <= stepIndex && styles.stepLabelOn]}>{label}</Text>
+          </View>
+        ))}
+      </View>
+
       {step === 0 && (
         <View style={styles.section}>
-          <Text style={styles.h}>1 · Photo</Text>
+          <Text style={styles.h}>Photo</Text>
           <Text style={styles.muted}>Take a picture or choose from the library.</Text>
           <Pressable style={styles.btn} onPress={() => void pickCamera()}>
             <Text style={styles.btnText}>Use camera</Text>
@@ -142,7 +155,7 @@ export default function NewReportScreen() {
 
       {step >= 1 && (
         <View style={styles.section}>
-          <Text style={styles.h}>2 · Location</Text>
+          <Text style={styles.h}>Location</Text>
           <Text style={styles.muted}>
             Source: {locSource}. Drag the pin to override.
           </Text>
@@ -175,7 +188,7 @@ export default function NewReportScreen() {
 
       {step >= 2 && (
         <View style={styles.section}>
-          <Text style={styles.h}>3 · Details</Text>
+          <Text style={styles.h}>Details</Text>
           <Text style={styles.label}>Category</Text>
           <View style={styles.chips}>
             {REPORT_CATEGORY_OPTIONS.map((c) => (
@@ -197,17 +210,9 @@ export default function NewReportScreen() {
             value={description}
             onChangeText={setDescription}
           />
-          <Pressable
-            style={[styles.btn, busy && styles.btnDisabled]}
-            disabled={busy}
-            onPress={() => void submit()}
-          >
-            {busy ? (
-              <ActivityIndicator color={theme.colors.onPrimary} />
-            ) : (
-              <Text style={styles.btnText}>Submit report</Text>
-            )}
-          </Pressable>
+          <AppButton variant="accent" loading={busy} disabled={busy} onPress={() => void submit()}>
+            Submit report
+          </AppButton>
         </View>
       )}
     </ScrollView>
@@ -216,10 +221,40 @@ export default function NewReportScreen() {
 
 const styles = StyleSheet.create({
   container: { padding: theme.spacing.md, paddingBottom: theme.spacing.sectionBottom, gap: theme.spacing.md },
-  section: { gap: 10 },
-  h: { fontSize: theme.font.section, fontWeight: "700", color: theme.colors.text },
-  muted: { color: theme.colors.muted },
-  map: { width: "100%", height: 220, borderRadius: theme.radius.sm },
+  stepsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.xs,
+  },
+  stepItem: { alignItems: "center", flex: 1 },
+  stepDot: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: theme.colors.chipInactive,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: theme.colors.borderLight,
+  },
+  stepDotOn: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
+  stepNum: { fontSize: theme.font.caption, fontWeight: "800", color: theme.colors.muted },
+  stepNumOn: { color: theme.colors.textInverse },
+  stepLabel: { marginTop: 6, fontSize: 11, color: theme.colors.muted, fontWeight: "600" },
+  stepLabelOn: { color: theme.colors.primaryDeep },
+  section: {
+    gap: 12,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radius.md,
+    padding: theme.spacing.md,
+    borderWidth: 1,
+    borderColor: theme.colors.borderLight,
+    ...cardShadow,
+  },
+  h: { fontSize: theme.font.section, fontWeight: "800", color: theme.colors.text, letterSpacing: -0.2 },
+  muted: { color: theme.colors.muted, lineHeight: 20 },
+  map: { width: "100%", height: 220, borderRadius: theme.radius.md, overflow: "hidden" },
   label: { fontWeight: "600", marginTop: theme.spacing.xs, color: theme.colors.text },
   input: {
     borderWidth: 1,
@@ -237,7 +272,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btnDisabled: { opacity: 0.7 },
-  btnText: { color: theme.colors.onPrimary, fontWeight: "600", fontSize: theme.font.body },
+  btnText: { color: theme.colors.textInverse, fontWeight: "700", fontSize: theme.font.body },
   btnSecondary: {
     borderWidth: 1,
     borderColor: theme.colors.border,
@@ -253,9 +288,9 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.pill,
     borderWidth: 1,
     borderColor: theme.colors.border,
-    backgroundColor: theme.colors.surface,
+    backgroundColor: theme.colors.chipInactive,
   },
   chipOn: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
   chipText: { color: theme.colors.text },
-  chipTextOn: { color: theme.colors.onPrimary, fontWeight: "600" },
+  chipTextOn: { color: theme.colors.textInverse, fontWeight: "700" },
 });

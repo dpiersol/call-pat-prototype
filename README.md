@@ -1,6 +1,6 @@
-# Call Pat (prototype)
+# Call Pat (prototype) — CABQ 311 Field
 
-Monorepo for the **Call Pat** internal reporting prototype: **Expo** employee app, **Node** API with **SQLite**, and **Vite** admin UI. Demo auth only (no real SSO).
+Monorepo for the **Call Pat** internal reporting prototype (branded **CABQ 311 Field** in the apps): **Expo** employee app, **Node** API with **SQLite**, and **Vite** admin UI. Demo auth only (no real SSO).
 
 **GitHub:** [github.com/dpiersol/call-pat-prototype](https://github.com/dpiersol/call-pat-prototype) (private)
 

@@ -1,7 +1,9 @@
 import { Redirect, router } from "expo-router";
-import { ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { AppButton } from "../components/ui/AppButton";
 import { useAuth } from "../lib/auth";
-import { theme } from "../lib/theme";
+import { cardShadow, theme } from "../lib/theme";
 
 export default function HomeScreen() {
   const { token, user, loading, logout } = useAuth();
@@ -9,7 +11,8 @@ export default function HomeScreen() {
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator color={theme.colors.primary} />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
+        <Text style={styles.loadingHint}>Loading your session…</Text>
       </View>
     );
   }
@@ -19,43 +22,101 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Call Pat</Text>
-      <Text style={styles.sub}>
-        Signed in as {user?.displayName} ({user?.role})
-      </Text>
-      <Pressable style={styles.btn} onPress={() => router.push("/new-report")}>
-        <Text style={styles.btnText}>New report</Text>
-      </Pressable>
-      <Pressable style={styles.btnSecondary} onPress={() => router.push("/my-reports")}>
-        <Text style={styles.btnSecondaryText}>My reports</Text>
-      </Pressable>
-      <Pressable onPress={() => void logout()}>
-        <Text style={styles.link}>Sign out</Text>
-      </Pressable>
-    </View>
+    <SafeAreaView style={styles.safe} edges={["bottom", "left", "right"]}>
+      <View style={styles.scrollContent}>
+        <View style={styles.hero}>
+          <Text style={styles.heroKicker}>CABQ · Employee tools</Text>
+          <Text style={styles.heroTitle}>311 Field</Text>
+          <Text style={styles.heroSub}>
+            Report what you see on the ground — photo, pin, and details sync to dispatch in one flow.
+          </Text>
+          <View style={styles.heroAccent} />
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardLabel}>Signed in</Text>
+          <Text style={styles.cardName}>{user?.displayName}</Text>
+          <Text style={styles.cardRole}>{user?.role}</Text>
+        </View>
+
+        <AppButton variant="accent" onPress={() => router.push("/new-report")}>
+          New report
+        </AppButton>
+        <AppButton variant="secondary" onPress={() => router.push("/my-reports")}>
+          My reports
+        </AppButton>
+
+        <AppButton variant="secondary" onPress={() => void logout()}>
+          Sign out
+        </AppButton>
+
+        <Text style={styles.footer}>Built for Albuquerque crews · Demo sign-in</Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  center: { flex: 1, justifyContent: "center", alignItems: "center" },
-  container: { flex: 1, padding: theme.spacing.md, gap: theme.spacing.sm + 4 },
-  title: { fontSize: theme.font.titleLarge, fontWeight: "700", color: theme.colors.text },
-  sub: { color: theme.colors.muted, marginBottom: theme.spacing.sm },
-  btn: {
+  safe: { flex: 1, backgroundColor: theme.colors.canvas },
+  scrollContent: {
+    flex: 1,
+    padding: theme.spacing.md,
+    gap: theme.spacing.md,
+  },
+  center: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: theme.colors.canvas },
+  loadingHint: { marginTop: theme.spacing.md, color: theme.colors.muted, fontSize: theme.font.small },
+  hero: {
     backgroundColor: theme.colors.primary,
-    padding: 14,
-    borderRadius: theme.radius.sm,
-    alignItems: "center",
+    borderRadius: theme.radius.lg,
+    padding: theme.spacing.lg,
+    overflow: "hidden",
+    ...cardShadow,
   },
-  btnText: { color: theme.colors.onPrimary, fontWeight: "600", fontSize: theme.font.body },
-  btnSecondary: {
+  heroKicker: {
+    color: theme.colors.mutedOnDark,
+    fontSize: theme.font.caption,
+    fontWeight: "700",
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+  },
+  heroTitle: {
+    fontSize: theme.font.hero,
+    fontWeight: "800",
+    color: theme.colors.textInverse,
+    marginTop: theme.spacing.xs,
+    letterSpacing: -0.5,
+  },
+  heroSub: {
+    marginTop: theme.spacing.sm,
+    fontSize: theme.font.small,
+    lineHeight: 20,
+    color: theme.colors.mutedOnDark,
+    maxWidth: 340,
+  },
+  heroAccent: {
+    position: "absolute",
+    right: -24,
+    top: -24,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: "rgba(255,255,255,0.12)",
+  },
+  card: {
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radius.md,
+    padding: theme.spacing.md,
     borderWidth: 1,
-    borderColor: theme.colors.border,
-    padding: 14,
-    borderRadius: theme.radius.sm,
-    alignItems: "center",
+    borderColor: theme.colors.borderLight,
+    ...cardShadow,
   },
-  btnSecondaryText: { fontWeight: "600", fontSize: theme.font.body, color: theme.colors.text },
-  link: { color: theme.colors.primary, marginTop: theme.spacing.md, textAlign: "center" },
+  cardLabel: { fontSize: theme.font.caption, color: theme.colors.muted, fontWeight: "600", textTransform: "uppercase" },
+  cardName: { fontSize: theme.font.title, fontWeight: "800", color: theme.colors.text, marginTop: 4 },
+  cardRole: { fontSize: theme.font.small, color: theme.colors.primaryDeep, fontWeight: "600", marginTop: 2 },
+  footer: {
+    textAlign: "center",
+    color: theme.colors.muted,
+    fontSize: theme.font.caption,
+    marginTop: theme.spacing.sm,
+  },
 });

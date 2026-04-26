@@ -12,7 +12,7 @@ import {
 import { attachmentImageSource, fetchReport } from "../../lib/api";
 import { useAuth } from "../../lib/auth";
 import { useFocusEffect } from "@react-navigation/native";
-import { theme } from "../../lib/theme";
+import { cardShadow, theme } from "../../lib/theme";
 
 export default function ReportDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -47,10 +47,13 @@ export default function ReportDetailScreen() {
       {err ? <Text style={styles.err}>{err}</Text> : null}
       {report && (
         <>
-          <Text style={styles.title}>{report.title}</Text>
-          <Text style={styles.muted}>
-            {report.category} · <Text style={styles.badge}>{report.status}</Text>
-          </Text>
+          <View style={styles.metaCard}>
+            <Text style={styles.title}>{report.title}</Text>
+            <View style={styles.metaRow}>
+              <Text style={styles.pillCat}>{report.category}</Text>
+              <Text style={styles.pillStatus}>{report.status}</Text>
+            </View>
+          </View>
           <Text style={styles.body}>{report.description}</Text>
           <Text style={styles.muted}>
             {report.addressText ??
@@ -66,13 +69,13 @@ export default function ReportDetailScreen() {
           ) : null}
 
           <Text style={styles.h2}>Status timeline</Text>
-          {(report.statusEvents ?? []).map((ev) => (
-            <View key={ev.id} style={styles.ev}>
+          {(report.statusEvents ?? []).map((ev, idx) => (
+            <View key={ev.id} style={[styles.ev, idx === (report.statusEvents?.length ?? 1) - 1 && styles.evLatest]}>
               <Text style={styles.evTitle}>{ev.toStatus}</Text>
               <Text style={styles.muted}>
                 {new Date(ev.createdAt).toLocaleString()}
               </Text>
-              {ev.note ? <Text style={styles.muted}>{ev.note}</Text> : null}
+              {ev.note ? <Text style={styles.evNote}>{ev.note}</Text> : null}
             </View>
           ))}
 
@@ -86,21 +89,53 @@ export default function ReportDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: theme.spacing.md, gap: theme.spacing.sm, paddingBottom: 32 },
-  title: { fontSize: theme.font.title, fontWeight: "700", color: theme.colors.text },
-  body: { fontSize: theme.font.body, lineHeight: 22, marginTop: theme.spacing.sm, color: theme.colors.text },
-  muted: { color: theme.colors.muted, marginTop: theme.spacing.xs },
-  badge: { fontWeight: "700", color: theme.colors.primary },
-  image: { width: "100%", height: 220, borderRadius: theme.radius.sm, marginTop: 12 },
-  h2: { marginTop: theme.spacing.md, fontSize: theme.font.section, fontWeight: "700", color: theme.colors.text },
-  ev: {
-    borderLeftWidth: 3,
-    borderLeftColor: theme.colors.timelineBorder,
-    paddingLeft: 12,
-    marginTop: theme.spacing.sm,
+  container: { padding: theme.spacing.md, gap: theme.spacing.md, paddingBottom: 40 },
+  metaCard: {
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radius.md,
+    padding: theme.spacing.md,
+    borderWidth: 1,
+    borderColor: theme.colors.borderLight,
+    ...cardShadow,
   },
-  evTitle: { fontWeight: "600", color: theme.colors.text },
+  title: { fontSize: theme.font.title, fontWeight: "800", color: theme.colors.text, letterSpacing: -0.2 },
+  metaRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: theme.spacing.sm },
+  pillCat: {
+    fontSize: theme.font.caption,
+    fontWeight: "700",
+    color: theme.colors.primaryDeep,
+    backgroundColor: theme.colors.canvasAlt,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: theme.radius.pill,
+    overflow: "hidden",
+  },
+  pillStatus: {
+    fontSize: theme.font.caption,
+    fontWeight: "800",
+    color: theme.colors.textInverse,
+    backgroundColor: theme.colors.accent,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: theme.radius.pill,
+    overflow: "hidden",
+    textTransform: "uppercase",
+  },
+  body: { fontSize: theme.font.body, lineHeight: 24, color: theme.colors.text },
+  muted: { color: theme.colors.muted, marginTop: 4, fontSize: theme.font.small },
+  image: { width: "100%", height: 220, borderRadius: theme.radius.md, marginTop: 4, ...cardShadow },
+  h2: { marginTop: theme.spacing.sm, fontSize: theme.font.section, fontWeight: "800", color: theme.colors.text },
+  ev: {
+    marginTop: theme.spacing.sm,
+    paddingLeft: theme.spacing.md,
+    borderLeftWidth: 3,
+    borderLeftColor: theme.colors.timelineTrack,
+    gap: 4,
+  },
+  evLatest: { borderLeftColor: theme.colors.timeline },
+  evTitle: { fontWeight: "800", color: theme.colors.text, fontSize: theme.font.body },
+  evNote: { color: theme.colors.muted, marginTop: 6, fontSize: theme.font.small, lineHeight: 20 },
   err: { color: theme.colors.error },
-  linkBtn: { marginTop: 20 },
-  link: { color: theme.colors.primary, fontWeight: "600" },
+  linkBtn: { marginTop: theme.spacing.md },
+  link: { color: theme.colors.primaryDeep, fontWeight: "700", fontSize: theme.font.body },
 });

@@ -33,7 +33,7 @@ export default function App() {
           <Link to={brandTarget} className="brand">
             <BrandWordmark tone={headerVariant === "staff" ? "on-red" : "on-blue"} />
             <span className="brand-product">
-              Call Pat
+              CABQ 311
               <span className="tagline">City of Albuquerque</span>
             </span>
           </Link>

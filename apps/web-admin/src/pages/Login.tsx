@@ -57,9 +57,9 @@ export default function Login() {
         <span className="see">SEE </span>
         <span className="that">THAT?</span>
       </div>
-      <h1>Call Pat</h1>
+      <h1>CABQ 311 Field</h1>
       <p className="muted" style={{ marginBottom: "1.2rem" }}>
-        City Employee Issue Reporting
+        City employee issue reporting
         <br />
         <small>Demo mode &middot; production will use @cabq.gov SSO</small>
       </p>

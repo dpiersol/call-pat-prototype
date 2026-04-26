@@ -8,15 +8,15 @@ export default function ReporterHome() {
       <div className="hero-card card">
         <img src={heroArt} alt="" width={520} height={200} className="hero-art" decoding="async" />
         <h1>
-          <span className="hero-see">SEE </span>
-          <span className="hero-that">THAT?</span>
+          <span className="hero-see">CABQ </span>
+          <span className="hero-that">311</span>
           <span style={{ display: "block", fontSize: "0.92em", marginTop: "0.35rem", fontWeight: 600 }}>
-            Report an issue in Burque
+            Field reporting for Burque
           </span>
         </h1>
         <p>
-          Help keep Albuquerque clean and safe — snap a photo, drop a pin, and
-          we will route it to the right crew.
+          Snap a photo, drop a pin, add context — dispatch sees it in one clean queue. Built for
+          employees; production uses your @cabq.gov sign-in.
         </p>
         <div className="hero-actions">
           <Link className="hero-primary" to="/reporter/new">

@@ -30,11 +30,19 @@ export default function Queue() {
       <div className="staff-page-head">
         <div className="staff-page-head-main">
           <h1>
-            Admin dashboard
+            Dispatch queue
             {count > 0 && <span className="count-pill">{count}</span>}
           </h1>
-          <p className="staff-page-sub">Triage and assign reported issues</p>
+          <p className="staff-page-sub">Triage, assign, and push to Oracle 311 when integrated</p>
         </div>
+        <button
+          type="button"
+          className="staff-refresh-btn"
+          onClick={() => void q.refetch()}
+          disabled={q.isFetching}
+        >
+          {q.isFetching ? "Refreshing…" : "Refresh"}
+        </button>
       </div>
       <div className="filter-toolbar">
         <label className="muted">
@@ -63,7 +71,7 @@ export default function Queue() {
       {q.isLoading && <p className="muted">Loading…</p>}
       {q.error && <p style={{ color: "var(--cabq-danger)" }}>{String(q.error)}</p>}
       {q.data && (
-        <div className="card card--panel" style={{ padding: 0, overflow: "auto" }}>
+        <div className="card card--panel queue-table-wrap" style={{ padding: 0, overflow: "auto" }}>
           <table>
             <thead>
               <tr>
