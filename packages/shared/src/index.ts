@@ -47,6 +47,12 @@ export const userSchema = z.object({
 });
 export type User = z.infer<typeof userSchema>;
 
+/** Current user profile from GET /me (includes gamification totals). */
+export const meResponseSchema = userSchema.extend({
+  pointsTotal: z.number().int().nonnegative(),
+});
+export type MeResponse = z.infer<typeof meResponseSchema>;
+
 export const statusEventSchema = z.object({
   id: z.string().uuid(),
   targetType: targetTypeSchema,

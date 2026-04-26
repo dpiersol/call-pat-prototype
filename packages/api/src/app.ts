@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { and, asc, desc, eq, gte, lte } from "drizzle-orm";
+import { and, asc, desc, eq, gte, lte, sum } from "drizzle-orm";
 import fs from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
@@ -31,6 +31,8 @@ const UPLOAD_DIR =
 const EDIT_WINDOW_MS = 24 * 60 * 60 * 1000;
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 const ALLOWED_MIME = new Set(["image/jpeg", "image/png", "image/webp"]);
+/** Points awarded when an employee successfully submits a new report. */
+const POINTS_PER_REPORT_SUBMITTED = 10;
 
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
@@ -82,12 +84,21 @@ app.post("/auth/demo-login", async (c) => {
 const authed = new Hono<{ Variables: AuthedVariables }>();
 authed.use("/*", authMiddleware);
 
-authed.get("/me", (c) => {
+authed.get("/me", async (c) => {
   const u = c.get("user");
+  const agg = await db
+    .select({ total: sum(schema.pointsLedger.delta) })
+    .from(schema.pointsLedger)
+    .where(eq(schema.pointsLedger.userId, u.sub))
+    .get();
+  const raw = agg?.total;
+  const pointsTotal =
+    typeof raw === "bigint" ? Number(raw) : Number(raw ?? 0) || 0;
   return c.json({
     id: u.sub,
     displayName: u.displayName,
     role: u.role,
+    pointsTotal,
   });
 });
 
@@ -196,6 +207,16 @@ authed.post("/reports", async (c) => {
     toStatus: "submitted",
     actorUserId: u.sub,
     note: null,
+    createdAt: now,
+  });
+
+  await db.insert(schema.pointsLedger).values({
+    id: randomUUID(),
+    userId: u.sub,
+    delta: POINTS_PER_REPORT_SUBMITTED,
+    reason: "report_submitted",
+    refType: "report",
+    refId: reportId,
     createdAt: now,
   });
 

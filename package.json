@@ -1,7 +1,11 @@
 {
   "name": "call-pat-prototype",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dpiersol/call-pat-prototype.git"
+  },
   "workspaces": [
     "packages/*",
     "apps/web-admin"
@@ -10,7 +14,8 @@
     "dev": "concurrently -n api,admin -c blue,green \"npm run dev -w @call-pat/api\" \"npm run dev -w @call-pat/web-admin\"",
     "install:mobile": "npm install --prefix apps/mobile",
     "dev:mobile": "npm run start --prefix apps/mobile",
-    "build": "npm run build -ws --if-present",
+    "build": "npm run build -ws --if-present && node scripts/record-build.mjs",
+    "version:test-iteration": "node scripts/record-test-iteration.mjs",
     "db:push": "npm run db:push -w @call-pat/api",
     "db:seed": "npm run db:seed -w @call-pat/api",
     "test": "npm run test -w @call-pat/api && npm run test -w @call-pat/web-admin"

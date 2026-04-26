@@ -1,12 +1,39 @@
 import { Redirect, router } from "expo-router";
+import { useCallback, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useFocusEffect } from "@react-navigation/native";
 import { AppButton } from "../components/ui/AppButton";
+import { fetchMe } from "../lib/api";
 import { useAuth } from "../lib/auth";
 import { cardShadow, theme } from "../lib/theme";
 
 export default function HomeScreen() {
   const { token, user, loading, logout } = useAuth();
+  const [pointsTotal, setPointsTotal] = useState<number | null>(null);
+  const [pointsErr, setPointsErr] = useState<string | null>(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!token) return;
+      let cancelled = false;
+      setPointsErr(null);
+      void (async () => {
+        try {
+          const me = await fetchMe(token);
+          if (!cancelled) setPointsTotal(me.pointsTotal);
+        } catch (e: unknown) {
+          if (!cancelled) {
+            setPointsErr(e instanceof Error ? e.message : "Could not load points");
+            setPointsTotal(null);
+          }
+        }
+      })();
+      return () => {
+        cancelled = true;
+      };
+    }, [token]),
+  );
 
   if (loading) {
     return (
@@ -37,6 +64,16 @@ export default function HomeScreen() {
           <Text style={styles.cardLabel}>Signed in</Text>
           <Text style={styles.cardName}>{user?.displayName}</Text>
           <Text style={styles.cardRole}>{user?.role}</Text>
+          {pointsTotal != null ? (
+            <View style={styles.pointsRow}>
+              <Text style={styles.pointsLabel}>Spotter points</Text>
+              <Text style={styles.pointsValue}>{pointsTotal}</Text>
+            </View>
+          ) : pointsErr ? (
+            <Text style={styles.pointsErr}>{pointsErr}</Text>
+          ) : (
+            <Text style={styles.pointsLoading}>Loading points…</Text>
+          )}
         </View>
 
         <AppButton variant="accent" onPress={() => router.push("/new-report")}>
@@ -116,6 +153,22 @@ const styles = StyleSheet.create({
   cardLabel: { fontSize: theme.font.caption, color: theme.colors.muted, fontWeight: "600", textTransform: "uppercase" },
   cardName: { fontSize: theme.font.title, fontWeight: "800", color: theme.colors.text, marginTop: 4 },
   cardRole: { fontSize: theme.font.small, color: theme.colors.primaryDeep, fontWeight: "600", marginTop: 2 },
+  pointsRow: {
+    marginTop: theme.spacing.md,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: theme.colors.canvasAlt,
+    borderRadius: theme.radius.sm,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: theme.colors.borderLight,
+  },
+  pointsLabel: { fontSize: theme.font.small, fontWeight: "700", color: theme.colors.text },
+  pointsValue: { fontSize: 22, fontWeight: "900", color: theme.colors.accent },
+  pointsLoading: { marginTop: theme.spacing.sm, fontSize: theme.font.caption, color: theme.colors.muted },
+  pointsErr: { marginTop: theme.spacing.sm, fontSize: theme.font.caption, color: theme.colors.error },
   footer: {
     textAlign: "center",
     color: theme.colors.muted,

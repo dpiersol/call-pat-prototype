@@ -404,6 +404,16 @@ tbody tr { transition: background .12s ease; }
   margin: 0 0 1.2rem;
   opacity: 0.9;
 }
+.hero-card .hero-points {
+  margin: -0.5rem 0 1rem;
+  font-size: 1.05rem;
+  opacity: 0.95;
+}
+.hero-card .hero-points strong {
+  font-size: 1.35rem;
+  color: #fecdd3;
+  font-weight: 900;
+}
 .hero-card .hero-actions {
   display: flex;
   gap: 12px;

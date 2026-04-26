@@ -67,3 +67,16 @@ export const attachments = sqliteTable("attachments", {
   mime: text("mime").notNull(),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
 });
+
+/** Append-only ledger for gamification (spotter points, etc.). */
+export const pointsLedger = sqliteTable("points_ledger", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id),
+  delta: integer("delta").notNull(),
+  reason: text("reason").notNull(),
+  refType: text("ref_type"),
+  refId: text("ref_id"),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+});

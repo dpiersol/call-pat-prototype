@@ -1,0 +1,36 @@
+---
+description: After every build, record version + repo in CHANGELOG; semver M.m.T; keep FILE_MANIFEST updated
+alwaysApply: true
+---
+
+# Versioning, changelog, and file manifest
+
+## Repository
+
+- **GitHub:** `https://github.com/dpiersol/call-pat-prototype` (also set on root `package.json` as `repository.url` for tooling).
+- When documenting releases or builds, **always include this URL** next to the version string.
+
+## Version format `vM.m.T` (root `package.json` `version`, no `v` prefix in JSON)
+
+| Segment | Meaning |
+|--------|---------|
+| **M** | **Development milestone** — bump only when the product milestone changes (major phase). |
+| **m** | **Iterations within the milestone** — after every **successful** full workspace `npm run build`, the post-build step records the new version in `CHANGELOG.md` and bumps **m** (middle segment), resetting **T** to `0`. |
+| **T** | **Unit test iterations** — bump with `npm run version:test-iteration` (or equivalent) when completing a deliberate test iteration (e.g. new suite, fix wave). Document the change in `CHANGELOG.md`. |
+
+Format examples: `1.0.0`, `1.3.0`, `1.3.2` (not `v1.0.0` inside `package.json`; use `v` prefix in changelog headings only if desired for readability — project uses `## vM.m.T` in `CHANGELOG.md`).
+
+## After every build
+
+1. Root `npm run build` must run `scripts/record-build.mjs` so **`CHANGELOG.md`** gains a dated entry with **version** and **repository URL**.
+2. Do not skip the changelog when the build is the canonical “green” build for a change set.
+3. Optional: set `BUILD_NOTE="short summary"` for a one-line note in that changelog entry.
+
+## File manifest
+
+- When **creating** or **renaming** meaningful source files, scripts, or config, add or update a row in **`docs/FILE_MANIFEST.md`**: **path**, **purpose** (one line), **who uses it** (app, script, CI, humans).
+- Prefer updating the manifest in the **same commit** as the new file.
+
+## Milestone bumps (M)
+
+- Bumping **M** is manual: edit root `package.json` `version`, add a `CHANGELOG.md` section explaining the new milestone, and align any external dashboards.

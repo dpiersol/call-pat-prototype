@@ -2,6 +2,7 @@ import type {
   CreateWorkOrderBody,
   DemoLoginRequest,
   DemoLoginResponse,
+  MeResponse,
   PatchWorkOrderBody,
   Report,
   WorkOrder,
@@ -23,6 +24,14 @@ function authHeaders(token: string | null): HeadersInit {
   const h: Record<string, string> = { "Content-Type": "application/json" };
   if (token) h.Authorization = `Bearer ${token}`;
   return h;
+}
+
+export async function fetchMe(token: string): Promise<MeResponse> {
+  const res = await fetch(`${API}/me`, {
+    headers: authHeaders(token),
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json() as Promise<MeResponse>;
 }
 
 export async function demoLogin(

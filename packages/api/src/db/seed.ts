@@ -184,6 +184,24 @@ async function seed() {
     }
   }
 
+  const reporterLedger = await db
+    .select()
+    .from(schema.pointsLedger)
+    .where(eq(schema.pointsLedger.userId, REPORTER_ID))
+    .all();
+  if (reporterLedger.length === 0) {
+    await db.insert(schema.pointsLedger).values({
+      id: randomUUID(),
+      userId: REPORTER_ID,
+      delta: 5,
+      reason: "welcome_bonus",
+      refType: null,
+      refId: null,
+      createdAt: new Date(),
+    });
+    console.log("Seeded welcome bonus points for demo reporter.");
+  }
+
   const existingReports = await db.select({ id: schema.reports.id }).from(schema.reports).all();
   if (existingReports.length > 0) {
     console.log(`Skipping report seed (${existingReports.length} reports already exist). Delete data/callpat.db to re-seed.`);
@@ -260,6 +278,16 @@ async function seed() {
       });
       prevStatus = chain[i];
     }
+
+    await db.insert(schema.pointsLedger).values({
+      id: randomUUID(),
+      userId: REPORTER_ID,
+      delta: 10,
+      reason: "report_submitted",
+      refType: "report",
+      refId: reportId,
+      createdAt,
+    });
   }
 
   console.log(`Seeded ${ABQ_REPORTS.length} reports and ${woCount} work orders with attachments and timelines.`);

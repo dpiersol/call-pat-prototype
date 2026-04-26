@@ -2,6 +2,7 @@ import type {
   CreateReportBody,
   DemoLoginRequest,
   DemoLoginResponse,
+  MeResponse,
   PatchReportBody,
   Report,
 } from "@call-pat/shared";
@@ -25,6 +26,14 @@ export async function demoLogin(
 
 function authHeaders(token: string): HeadersInit {
   return { Authorization: `Bearer ${token}` };
+}
+
+export async function fetchMe(token: string): Promise<MeResponse> {
+  const res = await fetch(`${API}/me`, {
+    headers: authHeaders(token),
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json() as Promise<MeResponse>;
 }
 
 export async function fetchMyReports(token: string): Promise<{ reports: Report[] }> {
