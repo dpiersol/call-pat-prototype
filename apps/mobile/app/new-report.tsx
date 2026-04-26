@@ -2,8 +2,8 @@ import type { LocationSource } from "@call-pat/shared";
 import { REPORT_CATEGORY_OPTIONS } from "@call-pat/shared";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
-import { router } from "expo-router";
-import { useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Pressable,
@@ -19,8 +19,18 @@ import { submitReport } from "../lib/api";
 import { useAuth } from "../lib/auth";
 import { cardShadow, theme } from "../lib/theme";
 
+function firstString(v: string | string[] | undefined): string | undefined {
+  if (v == null) return undefined;
+  return Array.isArray(v) ? v[0] : v;
+}
+
 export default function NewReportScreen() {
   const { token } = useAuth();
+  const params = useLocalSearchParams<{
+    prefillCategory?: string | string[];
+    prefillTitle?: string | string[];
+    prefillDescription?: string | string[];
+  }>();
   const [step, setStep] = useState(0);
   const [photoUri, setPhotoUri] = useState<string | null>(null);
   const [mime, setMime] = useState("image/jpeg");
@@ -38,6 +48,17 @@ export default function NewReportScreen() {
     longitudeDelta: 0.02,
   });
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    const cat = firstString(params.prefillCategory);
+    const ti = firstString(params.prefillTitle);
+    const de = firstString(params.prefillDescription);
+    if (cat && (REPORT_CATEGORY_OPTIONS as readonly string[]).includes(cat)) {
+      setCategory(cat as (typeof REPORT_CATEGORY_OPTIONS)[number]);
+    }
+    if (ti) setTitle(ti);
+    if (de) setDescription(de);
+  }, [params.prefillCategory, params.prefillTitle, params.prefillDescription]);
 
   async function pickCamera() {
     const perm = await ImagePicker.requestCameraPermissionsAsync();

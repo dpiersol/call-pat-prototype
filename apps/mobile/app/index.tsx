@@ -42,6 +42,9 @@ export default function HomeScreen() {
         <AppButton variant="accent" onPress={() => router.push("/new-report")}>
           New report
         </AppButton>
+        <AppButton variant="primary" onPress={() => router.push("/chat")}>
+          Guided chat
+        </AppButton>
         <AppButton variant="secondary" onPress={() => router.push("/my-reports")}>
           My reports
         </AppButton>
